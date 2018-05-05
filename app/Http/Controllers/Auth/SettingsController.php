@@ -77,12 +77,17 @@ class SettingsController extends Controller
     }
 
     /**
+     * Method for updating the account security. (authenticated user)
+     *
+     * @param  SecurityValidator $input Validation for the given user input.
      * @return RedirectResponse
      */
     public function updateSecurity(SecurityValidator $input): RedirectResponse 
     {
-        if (true) {
-
+        if ($this->usersRepository->getUser()->update(['password' => $input->password])) {
+            Toastr::success('Your account security has been updated.', 'Account updated');
         }
+
+        return back(Response::HTTP_FOUND);
     }
 }

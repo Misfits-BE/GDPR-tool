@@ -7,7 +7,7 @@
         <i class="fas fa-info-circle fa-fw mr-1"></i> Account information
     </a>
 
-    <a href="#" class="list-group-item list-group-item-action">
+    <a href="{{ route('profile.settings.security') }}" class="list-group-item list-group-item-action">
         <i class="fas fa-key fa-fw mr-1"></i> Account security
     </a>
 </div>

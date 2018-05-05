@@ -19,4 +19,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 // Account settings route
 Route::get('account-settings', 'Auth\SettingsController@index')->name('profile.settings');
+Route::get('account-settings/security', 'Auth\SettingsController@formSecurity')->name('profile.settings.security');
+Route::patch('account-settings/security', 'Auth\SettingsController@updateSecurity')->name('profile.settings.sec');
 Route::patch('account-settings/information', 'Auth\SettingsController@updateInformation')->name('profile.settings.info');

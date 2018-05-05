@@ -4,6 +4,13 @@ namespace App\Http\Requests\Auth\Settings;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * Class SecurityValidator
+ *
+ * @author      Tim Joosten <tim@activimse.be>
+ * @copyright   2018 Activisme_BE
+ * @package     App\Http\Requests\Auth\Settings
+ */
 class SecurityValidator extends FormRequest
 {
     /**
@@ -11,9 +18,9 @@ class SecurityValidator extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
-        return false;
+        return auth()->check();
     }
 
     /**
@@ -21,10 +28,8 @@ class SecurityValidator extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
-        return [
-            //
-        ];
+        return ['password' => 'required|string|min:6|confirmed'];
     }
 }

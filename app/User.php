@@ -15,16 +15,23 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $fillable = [
-        'name', 'email', 'password',
-    ];
+    protected $fillable = ['name', 'email', 'password'];
 
     /**
      * The attributes that should be hidden for arrays.
      *
      * @var array
      */
-    protected $hidden = [
-        'password', 'remember_token',
-    ];
+    protected $hidden = ['password', 'remember_token'];
+
+    /**
+     * Method for encypting the user given/generated password in the application.
+     *
+     * @param  string $password The given password
+     * @return void
+     */
+    public function setPasswordAttribute(string $password): void
+    {
+        $this->attributes['password'] = bcrypt($password);
+    }
 }
