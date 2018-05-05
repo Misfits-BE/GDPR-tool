@@ -100,3 +100,8 @@ body {
   line-height: 1.5;
 }
 
+.input-required {
+  color: #dc3545 !important;
+  font-weight: bold;
+}
+

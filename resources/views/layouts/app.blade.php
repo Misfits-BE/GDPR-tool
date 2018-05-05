@@ -10,10 +10,6 @@
 
     <title>{{ config('app.name', 'Laravel') }} - GDPR</title>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-    <script src="{{ asset('js/dashboard.js') }}" defer></script>
-
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
@@ -22,6 +18,12 @@
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.12/css/all.css" integrity="sha384-G0fIWCsCzJIMAVNQPfjH08cyYaUtMwjJwqiRKxxE/rx96Uroj1BtIQ6MLJuheaO9" crossorigin="anonymous">
+    <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
+
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}" ></script>
+    <script src="{{ asset('js/dashboard.js') }}"></script>
+    <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
 </head>
 <body class="bg-light">
     <div id="app">
@@ -64,6 +66,9 @@
                     <a class="nav-link pl-0 active" href="{{ route('home') }}">Dashboard</a>
                     <a class="nav-link" href="">Users</a>
                     <a class="nav-link" href="#">Domains</a>
+                    <a class="nav-link" href="">
+                        Concerns <span class="badge badge-pill bg-light align-text-bottom">27</span>
+                    </a>
 
                     @if ($currentUser->hasRole('admin'))
                         <a class="nav-link" href="">API Documentation</a>
@@ -76,5 +81,7 @@
             @yield('content')
         </main>
     </div>
+
+    {!! Toastr::message() !!} {{-- Notification partial --}}
 </body>
 </html>

@@ -6,6 +6,11 @@ use App\Repositories\UsersRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\View\View;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use App\Http\Requests\Auth\Settings\InformationValidator;
+use Symfony\Component\HttpFoundation\Response;
+use Toastr;
+use App\Http\Requests\Auth\Settings\SecurityValidator;
 
 /**
  * Class SettingsController
@@ -35,12 +40,42 @@ class SettingsController extends Controller
 
     /**
      * Get the index page for the account settings
+     * ----
+     * Defaults account settings route points to the account information page
      *
      * @return View
      */
     public function index(): View
     {
         $user = $this->usersRepository->getUser();
-        return view('account-settings.index', compact('user'));
+        return view('account-settings.information', compact('user'));
+    }
+
+    public function formSecurity()
+    {
+        return view('account-settings.password');
+    }
+
+    /**
+     * Method for updating the account information. (authenticated user)
+     * 
+     * @param  InformationValidator $input Validation for the given user input.
+     * @return RedirectResponse
+     */
+    public function updateInformation(InformationValidator $input): RedirectResponse
+    {
+        if ($this->usersRepository->getUser()->update($input->except('_token', '_method'))) {
+            Toastr::success('Your account information has been updated.', 'Account updated!');
+        }
+
+        return back(Response::HTTP_FOUND);
+    }
+
+    /**
+     * @return RedirectResponse
+     */
+    public function updateSecurity(SecurityValidator $input): RedirectResponse 
+    {
+
     }
 }

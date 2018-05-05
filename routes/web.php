@@ -19,3 +19,4 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 // Account settings route
 Route::get('account-settings', 'Auth\SettingsController@index')->name('profile.settings');
+Route::patch('account-settings/information', 'Auth\SettingsController@updateInformation')->name('profile.settings.info');
