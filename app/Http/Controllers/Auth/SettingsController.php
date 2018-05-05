@@ -51,6 +51,11 @@ class SettingsController extends Controller
         return view('account-settings.information', compact('user'));
     }
 
+    /**
+     * Get the security form for the account settings. 
+     * 
+     * @return View
+     */
     public function formSecurity()
     {
         return view('account-settings.password');
@@ -76,6 +81,8 @@ class SettingsController extends Controller
      */
     public function updateSecurity(SecurityValidator $input): RedirectResponse 
     {
+        if (true) {
 
+        }
     }
 }
