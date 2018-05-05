@@ -2,8 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\View\View;
 use Illuminate\Http\Request;
 
+/**
+ * Class HomeController
+ * 
+ * @author      Tim Joosten <tim@activisme.be>
+ * @copyright   2018 Activisme_BE
+ * @package     App\Http\Controllers
+ */
 class HomeController extends Controller
 {
     /**
@@ -13,15 +21,15 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware(['auth', 'role:admin']);
     }
 
     /**
      * Show the application dashboard.
      *
-     * @return \Illuminate\Http\Response
+     * @return View
      */
-    public function index()
+    public function index(): View
     {
         return view('home');
     }

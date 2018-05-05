@@ -3,12 +3,14 @@
 use Illuminate\Database\Seeder;
 
 /**
- * Class DatabaseSeeder
+ * Class UsersTableSeeder
+ * ----
+ * Create dummy users in the application. This class also covers roles and permissions. 
  * 
  * @author      Tim Joosten <tim@activisme.be>
- * @copyright   2018 Activisme_BE
+ * @copyright   Activisme_BE
  */
-class DatabaseSeeder extends Seeder
+class UsersTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -17,6 +19,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        $this->call(UsersTableSeeder::class); //! Also covers roles and permissions.
+        //
     }
 }
