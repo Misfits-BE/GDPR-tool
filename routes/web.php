@@ -16,3 +16,6 @@ Auth::routes();
 // Home routes 
 Route::get('/', 'WelcomeController@index')->name('welcome');
 Route::get('/home', 'HomeController@index')->name('home');
+
+// Account settings route
+Route::get('account-settings', 'Auth\SettingsController@index')->name('profile.settings');
