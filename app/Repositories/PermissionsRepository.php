@@ -2,7 +2,8 @@
 
 namespace App\Repositories;
 
-use App\Models\Permission;
+use Illuminate\Database\Eloquent\Collection;
+use Spatie\Permission\Models\Permission;
 use ActivismeBE\DatabaseLayering\Repositories\Contracts\RepositoryInterface;
 use ActivismeBE\DatabaseLayering\Repositories\Eloquent\Repository;
 
@@ -22,4 +23,15 @@ class PermissionsRepository extends Repository
     {
         return Permission::class;
     }
+
+    /**
+     * Get only the read access roles out of the database.
+     *
+     * @return Collection
+     */
+    public function getReadPermissions(): Collection
+    {
+        return $this->model->where('name', 'LIKE', 'view_%')->get();
+    }
+
 }
