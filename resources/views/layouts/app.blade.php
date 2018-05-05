@@ -40,7 +40,7 @@
                             </a>
 
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item">
+                                <a href="{{ route('profile.settings') }}" class="dropdown-item">
                                     <i class="fas fa-fw fa-user-cog"></i> Account settings
                                 </a>
 
@@ -61,7 +61,7 @@
         <div class="nav-scroller bg-white box-shadow">
             <div class="container">
                 <nav class="nav nav-underline">
-                    <a class="nav-link pl-0 active" href="#">Dashboard</a>
+                    <a class="nav-link pl-0 active" href="{{ route('home') }}">Dashboard</a>
                     <a class="nav-link" href="">Users</a>
                     <a class="nav-link" href="#">Domains</a>
 

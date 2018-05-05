@@ -42,4 +42,17 @@ class UsersRepository extends Repository
             $commandBus->warn('Password is "secret"');
         }
     }
+
+
+    /**
+     * Method for getting the data from a user out off the database.
+     *
+     * @param  int|null $userId The unique identifier from the user. Default toid from authenticated user.
+     * @return User
+     */
+    public function getUser(?int $userId = null): User
+    {
+        $userId = is_null($userId) ? auth()->user()->id : $userId;
+        return $this->findOrFail($userId, ['name', 'email']);
+    }
 }
