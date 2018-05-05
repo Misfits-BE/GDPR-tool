@@ -151,6 +151,11 @@ return [
          * Package Service Providers...
          */
 
+        /**
+         * Custom Servcie providers...
+         */
+        App\Providers\ComposerServiceProvider::class,
+
         /*
          * Application Service Providers...
          */
