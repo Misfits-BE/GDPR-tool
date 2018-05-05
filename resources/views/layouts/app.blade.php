@@ -64,13 +64,19 @@
             <div class="container">
                 <nav class="nav nav-underline">
                     <a class="nav-link pl-0 active" href="{{ route('home') }}">Dashboard</a>
-                    <a class="nav-link" href="">Users</a>
-                    <a class="nav-link" href="#">Domains</a>
+
                     <a class="nav-link" href="">
-                        Concerns <span class="badge badge-pill bg-light align-text-bottom">27</span>
+                        Concerns <span class="badge badge-pill badge-danger align-text-bottom">27</span>
                     </a>
 
+                    <a class="nav-link" href="{{ route('users.index') }}">
+                        Users <span class="badge badge-pill badge-danger align-text-bottom">27</span>
+                    </a>
+
+                    <a class="nav-link" href="#">Domains</a>
+
                     @if ($currentUser->hasRole('admin'))
+                        <a class="nav-link" href="">Logs</a>
                         <a class="nav-link" href="">API Documentation</a>
                     @endif
                 </nav>
