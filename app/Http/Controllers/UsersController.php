@@ -17,14 +17,24 @@ use Illuminate\View\View;
  */
 class UsersController extends Controller
 {
+    /** @var UsersRepository $usersRepository The abstraction layer variable (MySQL: users) */
     private $usersRepository;
 
+    /**
+     * UsersController constructor.
+     *
+     * @param  UsersRepository $usersRepository
+     * @return void
+     */
     public function __construct(UsersRepository $usersRepository)
     {
         $this->middleware(['auth', 'role:admin']);
         $this->usersRepository = $usersRepository;
     }
 
+    /**
+     * @return View
+     */
     public function index(): View
     {
         return view('users.index', [
