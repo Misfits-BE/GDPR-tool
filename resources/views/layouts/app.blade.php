@@ -70,7 +70,7 @@
                     </a>
 
                     <a class="nav-link" href="{{ route('users.index') }}">
-                        Users <span class="badge badge-pill badge-danger align-text-bottom">27</span>
+                        Users <span class="badge badge-pill badge-danger align-text-bottom">{{ $countUsers }}</span>
                     </a>
 
                     <a class="nav-link" href="#">Domains</a>
