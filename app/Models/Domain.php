@@ -18,4 +18,15 @@ class Domain extends Model
      *
      * @return array
      */
+    protected $fillable = [];
+
+    /**
+     * Get all the privacy concerns for the domain\project
+     * 
+     * @return HasMany
+     */
+    public function concerns()
+    {
+        return $this->hasMany(Concern::class);   
+    }
 }
