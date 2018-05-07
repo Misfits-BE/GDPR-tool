@@ -36,9 +36,15 @@
 
                 <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
                     <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a href="" class="nav-link text-danger">
+                                <i class="far align-middle fa-fw fa-bell"></i> <span class="badge align-middle badge-pill badge-danger">32</span>
+                            </a>
+                        </li>
+
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="far fa-fw fa-user"></i> {{ $currentUser->name }} <span class="caret"></span>
+                                {{ $currentUser->name }} <span class="caret"></span>
                             </a>
 
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -63,21 +69,23 @@
         <div class="nav-scroller bg-white box-shadow">
             <div class="container">
                 <nav class="nav nav-underline">
-                    <a class="nav-link pl-0 active" href="{{ route('home') }}">Dashboard</a>
+                    <a class="nav-link pl-0 active" href="{{ route('home') }}"><i class="fas fa-fw fa-tachometer-alt"></i> Dashboard</a>
 
                     <a class="nav-link" href="">
+                        <i class="fas fa-fw fa-question-circle"></i>
                         Concerns <span class="badge badge-pill badge-danger align-text-bottom">27</span>
                     </a>
 
                     <a class="nav-link" href="{{ route('users.index') }}">
+                        <i class="fas fa-fw fa-users"></i>
                         Users <span class="badge badge-pill badge-danger align-text-bottom">{{ $countUsers }}</span>
                     </a>
 
-                    <a class="nav-link" href="#">Domains</a>
+                    <a class="nav-link" href="{{ route('domains.index') }}"><i class="fas fa-fw fa-link"></i> Domains</a>
 
                     @if ($currentUser->hasRole('admin'))
-                        <a class="nav-link" href="">Logs</a>
-                        <a class="nav-link" href="">API Documentation</a>
+                        <a class="nav-link" href=""><i class="fas fa-fw fa-th-list"></i> Logs</a>
+                        <a class="nav-link" href=""><i class="fas fa-fw fa-book"></i> API Documentation</a>
                     @endif
                 </nav>
             </div>

@@ -26,7 +26,7 @@ class DomainController extends Controller
      */
     public function __construct(DomainRepository $domainRepository)
     {
-        $this->middleware(['role:auth']); 
+        $this->middleware(['auth', 'role:admin']); 
         $this->domainRepository = $domainRepository;
     }
 
@@ -37,16 +37,23 @@ class DomainController extends Controller
      */
     public function index(): View
     {
-        //
+        return view('domains.index', [
+            'domains' => $this->domainRepository->with(['dpo'])->all()
+        ]);
     }
 
+    /**
+     * Display the application view for creating a new domain in the application. 
+     * 
+     * @return View
+     */
     public function create(): View
     {
-
+        return view('domains.create');
     }
 
     public function store(): RedirectResponse
     {
-        
+        //
     }
 }

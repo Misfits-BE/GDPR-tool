@@ -50,9 +50,7 @@ class UsersController extends Controller
      */
     public function index(): View
     {
-        return view('users.index', [
-            'users' => $this->usersRepository->simplePaginate(15, ['name', 'email', 'created_at'])
-        ]);
+        return view('users.index', ['users' => $this->usersRepository->simplePaginate(15, ['name', 'email', 'created_at'])]);
     }
 
     /**
@@ -62,9 +60,7 @@ class UsersController extends Controller
      */
     public function create(): View 
     {
-        return view('users.create', [
-            'roles' => $this->rolesRepository->all(['name'])
-        ]); 
+        return view('users.create', ['roles' => $this->rolesRepository->all(['name'])]); 
     }
 
     /**
