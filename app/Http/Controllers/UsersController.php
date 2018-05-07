@@ -3,13 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Repositories\UsersRepository;
+use App\Http\Requests\Users\UserValidator;
+use App\Repositories\RolesRepository;
 use Brian2694\Toastr\Facades\Toastr;
-use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
-use App\Http\Requests\Users\UserValidator;
 use Symfony\Component\HttpFoundation\Response;
-use App\Repositories\RolesRepository;
 
 /**
  * Class UsersController
