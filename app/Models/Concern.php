@@ -6,6 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Concern extends Model
 {
+    /**
+     * Mass-assign fields for the database table. 
+     * 
+     * @return array
+     */
     protected $fillable = [];
 
     public function scopeOpenConcerns($query): int

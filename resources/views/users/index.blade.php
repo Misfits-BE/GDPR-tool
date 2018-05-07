@@ -14,9 +14,9 @@
                     <table class="table table-sm">
                         <thead>
                             <tr>
-                                <th scope="col">Name</th>
-                                <th scope="col">Email</th>
-                                <th colspan="2">Registered at</th> {{-- Colspan 2 needed for the functions --}}
+                                <th class="no-border" scope="col">Name</th>
+                                <th class="no-border" scope="col">Email</th>
+                                <th class="no-border" scope="col" colspan="2">Registered at</th> {{-- Colspan 2 needed for the functions --}}
                             </tr>
                         </thead>
                         <tbody>

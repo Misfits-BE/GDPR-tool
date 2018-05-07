@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Repositories\DomainRepository;
 use Illuminate\View\View;
+use Illuminate\Http\RedirectResponse;
 
 /**
  * Class DomainController
@@ -37,5 +38,15 @@ class DomainController extends Controller
     public function index(): View
     {
         //
+    }
+
+    public function create(): View
+    {
+
+    }
+
+    public function store(): RedirectResponse
+    {
+        
     }
 }
