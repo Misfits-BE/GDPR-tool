@@ -51,6 +51,24 @@
                         </div>
 
                         <div class="form-group row">
+                            <label for="roles" class="col-3 col-form">User access role <span class="input-required">*</span></label>
+
+                            <div class="col-9">
+                                <select class="form-control @error('role', 'is-invalid')" @input('role')>
+                                    <option value="">-- Select the access role for the user --</option>
+
+                                    @foreach ($roles as $role)
+                                        <option value="{{ $role->name }}" @if (old('role') == $role->name) selected @endif>
+                                            {{ ucfirst($role->name) }}
+                                        </option>
+                                    @endforeach
+                                </select>
+
+                                @error('role', '<div class="invalid-feedback">:message</div>')
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
                             <div class="offset-3 col-9">
                                 <button type="submit" class="btn btn-outline-success">
                                     <i class="fas fa-fw fa-user-plus"></i> Create

@@ -81,6 +81,8 @@ class UsersController extends Controller
         $input->merge(['password' => str_random(15), 'name' => "{$input->firstname} {$input->lastname}"]);
 
         if ($user = $this->usersRepository->create($input->all())) {
+            $user->assignRole($input->role);
+
             Toastr::success("The account for {$user->name} has been created.", 'Account created.');
         }
 
