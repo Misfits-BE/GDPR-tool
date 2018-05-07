@@ -9,6 +9,8 @@
         <div class="col-9">
             <div class="card border-0 box-shadow">
                 <div class="card-body">
+                    <h6 class="border-bottom border-gray pb-2 mb-3">Users overview</h6>
+
                     <table class="table table-sm">
                         <thead>
                             <tr>

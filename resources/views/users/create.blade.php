@@ -9,6 +9,7 @@
         <div class="col-9">
             <div class="card border-o bow-shadow">
                 <div class="card-body">
+                    <h6 class="border-bottom border-gray pb-2 mb-3">Create new user</h6>
                 
                     <div class="alert alert-primary" role="alert">
                         <strong class="mr-1"><i class="fas fa-fw fa-exclamation-triangle"></i> info:</strong>
@@ -19,33 +20,39 @@
                         </button>
                     </div>
 
-                    <form action="" method="POST">
+                    <form action="{{ route('users.store') }}" method="POST">
                         @csrf {{-- Form field protection --}}
 
                         <div class="form-group row">
                             <label for="firstname" class="col-3 col-form-label">User firstname <span class="input-required">*</span></label>
+
+                            <div class="col-9">
+                                <input type="text" class="form-control @error('firstname', 'is-invalid')" placeholder="The firstname from the user" id="firstname" @input('firstname')>
+                                @error('firstname', '<div class="invalid-feedback">:message</div>')
+                            </div>
                         </div>
 
                         <div class="form-group row">
                             <label for="lastname" class="col-3 col-form-label">User lastname <span class="input-required">*</span></label>
 
                             <div class="col-9">
-                                <input type="text" class="form-control @error('firstname', 'is-invalid')" placeholder="The lastname from the user" id="lastname" @input('lastname')>
+                                <input type="text" class="form-control @error('lastname', 'is-invalid')" placeholder="The lastname from the user" id="lastname" @input('lastname')>
+                                @error('lastname', '<div class="invalid-feedback">:message</div>')
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label for="email" class="col-3 col-form-label">User Email address <span class="input-required">*</span></label>
-                        
+
                             <div class="col-9">
                                 <input type="email" class="form-control @error('email', 'is-invalid')" placeholder="The email address from the user" id="email" @input('email')>
-                                @error('email', '<div class="feedback-invalid">:message</div>')
+                                @error('email', '<div class="invalid-feedback">:message</div>')
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <div class="offset-3 col-9">
-                                <button type="submit" class="btn btn-outline-success"> 
+                                <button type="submit" class="btn btn-outline-success">
                                     <i class="fas fa-fw fa-user-plus"></i> Create
                                 </button>
 

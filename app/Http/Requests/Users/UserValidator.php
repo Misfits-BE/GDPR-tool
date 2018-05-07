@@ -4,6 +4,15 @@ namespace App\Http\Requests\Users;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * Class UserValidator
+ * ---
+ * Method for validating the form when we try to create a new user in the application.
+ *
+ * @author      Tim Joosten <tim@activisme.be>
+ * @copyright   2018 Activisme_BE
+ * @package     App\Http\Requests\Users
+ */
 class UserValidator extends FormRequest
 {
     /**
@@ -13,7 +22,7 @@ class UserValidator extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return auth()->check() && auth()->user()->hasRole('admin');
     }
 
     /**
@@ -21,10 +30,12 @@ class UserValidator extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return [
-            //
+            'firstname' => 'required|string|max:255',
+            'lastname'  => 'required|string|max:255',
+            'email'     => 'required|string|email|max:255|unique:users',
         ];
     }
 }

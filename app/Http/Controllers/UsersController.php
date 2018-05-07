@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Repositories\UsersRepository;
+use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
@@ -77,13 +78,13 @@ class UsersController extends Controller
      */
     public function store(UserValidator $input): RedirectResponse 
     {
-        $input->merge(['password' => str_random(15)]);
+        $input->merge(['password' => str_random(15), 'name' => "{$input->firstname} {$input->lastname}"]);
 
-        if ($user = $this->usersRepository->create($input)) {
+        if ($user = $this->usersRepository->create($input->all())) {
             Toastr::success("The account for {$user->name} has been created.", 'Account created.');
         }
 
-        return back(Response::HTTP_FOUND); // Code: 302
+        return redirect()->route('users.index', [], Response::HTTP_FOUND); // Code: 302
     }
 
     /**
