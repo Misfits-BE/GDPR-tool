@@ -19,6 +19,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 // User management routes
 Route::get('/users', 'UsersController@index')->name('users.index');
+Route::get('/users/create', 'UsersController@create')->name('users.create');
 
 // Account settings route
 Route::get('/account-settings', 'Auth\SettingsController@index')->name('profile.settings');

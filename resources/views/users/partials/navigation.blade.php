@@ -7,7 +7,7 @@
         <i class="fas fa-database fa-fw mr-1"></i> Users overview
     </a>
 
-    <a href="" class="list-group-item list-group-item-action">
+    <a href="{{ route('users.create') }}" class="list-group-item list-group-item-action">
         <i class="fas fa-fw fa-user-plus mr-1"></i> Create new user
     </a>
 
