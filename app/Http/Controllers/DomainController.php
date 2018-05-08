@@ -52,11 +52,22 @@ class DomainController extends Controller
         return view('domains.create');
     }
 
+    /**
+     * Store the new project domain in the database.
+     *
+     * @return RedirectResponse
+     */
     public function store(): RedirectResponse
     {
         //
     }
 
+    /**
+     * Show a specific domain in the application;
+     *
+     * @param  int $domain The unique identifier from the domain in the database.
+     * @return View
+     */
     public function show(int $domain)
     {
 
