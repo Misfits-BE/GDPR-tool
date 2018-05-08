@@ -21,7 +21,7 @@ class Domain extends Model
      *
      * @return array
      */
-    protected $fillable = ['name', 'url', 'dpo'];
+    protected $fillable = ['name', 'url', 'dpo_id'];
 
     /**
      * Get all the privacy concerns for the domain\project

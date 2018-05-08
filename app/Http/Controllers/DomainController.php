@@ -38,7 +38,7 @@ class DomainController extends Controller
     public function index(): View
     {
         return view('domains.index', [
-            'domains' => $this->domainRepository->with(['dpo'])->all()
+            'domains' => $this->domainRepository->with(['dpo', 'concern'])->simplePaginate()
         ]);
     }
 
