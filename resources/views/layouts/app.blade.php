@@ -52,6 +52,14 @@
                                     <i class="fas fa-fw fa-user-cog"></i> Account settings
                                 </a>
 
+                                @if (! $currentUser->hasRole('admin'))
+                                    <a href="" class="dropdown-item">
+                                        <i class="fas fa-fw fa-question-circle"></i> Request support
+                                    </a>
+                                @endif
+
+                                <div class="dropdown-divider"></div>
+
                                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                     <i class="fa-fw fas fa-power-off text-danger"></i> {{ __('Logout') }}
                                 </a>
