@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Repositories\DomainRepository;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use App\Repositories\Criteria\Domains\DomainSearchCriteria;
 
 /**
  * Class DomainController
@@ -35,11 +37,17 @@ class DomainController extends Controller
      * 
      * @return View
      */
-    public function index(): View
+    public function index(Request $input): View
     {
-        return view('domains.index', [
-            'domains' => $this->domainRepository->with(['dpo', 'concern'])->simplePaginate()
-        ]);
+        if (! is_null($input->term)) { 
+            //! The term is not empty so the user tries to performs a search on the domains table
+            $this->domainRepository->applyCriteria(new DomainSearchCriteria($input->term));
+        }
+
+        $domains = $this->domainRepository->with(['dpo', 'concern'])->simplePaginate(15); 
+        $term    = $input->term;
+
+        return view('domains.index', compact('domains', 'term'));
     }
 
     /**

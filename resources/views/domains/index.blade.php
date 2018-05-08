@@ -42,7 +42,13 @@
                             @else {{-- There are no domains found --}}
                                 <tr>
                                     <td colspan="4">
-                                        <span class="text-muted"><i>(There are no domains registered in the GDPR tool)</i></span>
+                                        @if (! is_null($term)) {{-- There is a search term given --}}
+                                            <span class="text-muted">
+                                                <i>(There are no domains found with the term '{{ $term }}')</i>
+                                            </span>
+                                        @else {{-- There is no search term given --}}
+                                            <span class="text-muted"><i>(There are no domains registered in the GDPR tool)</i></span>
+                                        @endif
                                     </td>
                                 </tr>
                             @endif
