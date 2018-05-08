@@ -31,7 +31,7 @@ class Concern extends Model
      * @param  mixed $query The eloquent builder instance.
      * @return Builder
      */
-    public function scopeOpenConcerns($query): Builder
+    public function scopeOpen($query): Builder
     {
         return $query->where('is_open', true);
     }
@@ -42,7 +42,7 @@ class Concern extends Model
      * @param  mixed $query The eloquent builder instance
      * @return Builder
      */
-    public function scopeClosedConcerns($query): Builder
+    public function scopeClosed($query): Builder
     {
         return $query->where('is_open', false);
     }

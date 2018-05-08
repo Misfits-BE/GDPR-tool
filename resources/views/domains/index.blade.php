@@ -27,6 +27,13 @@
                                         <td>{{ $domain->dpo->name }}</td>
 
                                         <td> {{-- Concerns --}}
+                                            <a href="" class="label label-success">
+                                                {{ $domain->concerns()->open()->count() }} Open
+                                            </a>
+
+                                            <a href="" class="label label-danger">
+                                                {{ $domain->concerns()->closed()->count() }} Closed
+                                            </a>
                                         </td> {{-- /// Concerns --}}
 
                                         <td><span class="text-muted">{{ $domain->created_at->diffForHumans() }}</span></td>
