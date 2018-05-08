@@ -17,5 +17,17 @@ Auth::routes();
 Route::get('/', 'WelcomeController@index')->name('welcome');
 Route::get('/home', 'HomeController@index')->name('home');
 
+// User management routes
+Route::get('/users', 'UsersController@index')->name('users.index');
+Route::get('/users/create', 'UsersController@create')->name('users.create');
+Route::post('/users/store', 'UsersController@store')->name('users.store');
+
+// Domain routes
+Route::get('/domains', 'DomainController@index')->name('domains.index');
+Route::get('/domains/create', 'DomainController@create')->name('domains.create');
+
 // Account settings route
-Route::get('account-settings', 'Auth\SettingsController@index')->name('profile.settings');
+Route::get('/account-settings', 'Auth\SettingsController@index')->name('profile.settings');
+Route::get('/account-settings/security', 'Auth\SettingsController@formSecurity')->name('profile.settings.security');
+Route::patch('/account-settings/security', 'Auth\SettingsController@updateSecurity')->name('profile.settings.sec');
+Route::patch('/account-settings/information', 'Auth\SettingsController@updateInformation')->name('profile.settings.info');

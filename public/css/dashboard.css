@@ -7,6 +7,18 @@ body {
   padding-top: 56px;
 }
 
+.table th.no-border {
+  border-top: none;
+}
+
+.table-border-margin {
+  margin-bottom: .25rem;
+}
+
+.full-length {
+  width: 100%;
+}
+
 @media (max-width: 991.98px) {
   .offcanvas-collapse {
     position: fixed;
@@ -98,5 +110,10 @@ body {
 
 .lh-150 {
   line-height: 1.5;
+}
+
+.input-required {
+  color: #dc3545 !important;
+  font-weight: bold;
 }
 
