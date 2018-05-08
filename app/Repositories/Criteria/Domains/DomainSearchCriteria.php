@@ -32,9 +32,8 @@ class DomainSearchCriteria extends Criteria
     /**
      * The Eloquent builder instance that needs to be apply on the parent instance. 
      *
-     * @param                       $model      The Eloquent database model where the criterie should applied on.
-     * @param RepositoryInterface   $repository The interface from the repository class.
-     *
+     * @param  mixed                $model      The Eloquent database model where the criterie should applied on.
+     * @param  RepositoryInterface  $repository The interface from the repository class.
      * @return Builder
      */
     public function apply($model, RepositoryInterface $repository): Builder

@@ -24,6 +24,7 @@ Route::post('/users/store', 'UsersController@store')->name('users.store');
 
 // Domain routes
 Route::get('/domains', 'DomainController@index')->name('domains.index');
+Route::get('/domains/create', 'DomainController@create')->name('domains.create');
 
 // Account settings route
 Route::get('/account-settings', 'Auth\SettingsController@index')->name('profile.settings');

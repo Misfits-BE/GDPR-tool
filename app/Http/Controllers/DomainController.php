@@ -7,6 +7,8 @@ use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Repositories\Criteria\Domains\DomainSearchCriteria;
+use App\Repositories\UsersRepository;
+use function bar\baz\foo;
 
 /**
  * Class DomainController
@@ -17,18 +19,24 @@ use App\Repositories\Criteria\Domains\DomainSearchCriteria;
  */
 class DomainController extends Controller
 {
-    /** @var DomainRepository $domainRepository The variable for the domain abstraction layer. */
+    /** @var DomainRepository $domainRepository The variable for the domain abstraction layer. (MySQL: domains) */
     private $domainRepository; 
+
+    /** @var UsersRepository $userRepository The variable for the users abstraction layer. (MySQL: users) */
+    private $userRepository; 
 
     /**
      * DomainController constructor 
      * 
      * @param  DomainRepository $domainRepository The abstraction layer between database and controller (MySQL: Domains)
+     * @param  UsersRepository  $usersRepository  The abstraction layer between database and controller (MySQL: users)
      * @return void
      */
-    public function __construct(DomainRepository $domainRepository)
+    public function __construct(DomainRepository $domainRepository, UsersRepository $userRepository)
     {
         $this->middleware(['auth', 'role:admin']); 
+
+        $this->userRepository   = $userRepository;
         $this->domainRepository = $domainRepository;
     }
 
@@ -57,7 +65,10 @@ class DomainController extends Controller
      */
     public function create(): View
     {
-        return view('domains.create');
+        $term = null; // When a user search for a domain he will redirected to the domain index page. 
+        $dpos = $this->userRepository->getUsersByRole('get', 'admin', ['id', 'name', 'email']);
+        
+        return view('domains.create', compact('term', 'dpos'));
     }
 
     /**

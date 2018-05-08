@@ -6,6 +6,7 @@ use App\User;
 use ActivismeBE\DatabaseLayering\Repositories\Contracts\RepositoryInterface;
 use ActivismeBE\DatabaseLayering\Repositories\Eloquent\Repository;
 use Spatie\Permission\Models\Role;
+use RuntimeException;
 
 /**
  * Class UsersRepository
@@ -43,6 +44,27 @@ class UsersRepository extends Repository
         }
     }
 
+    /**
+     * Get all the users for a given ACL role. 
+     * 
+     * @param  string $type   The output identifier for the database results.
+     * @param  string $name   The name from the ACL role. 
+     * @param  array  $fields The database results u want to use further in your application.
+     * @return Collection|array
+     */
+    public function getUsersByRole(string $type = 'get', string $name, array $fields = ['*'])
+    {
+        $baseQuery = $this->model->role($name);
+
+        switch ($type) { // Identify the result output form the database.
+            case 'get':     return $baseQuery->get($fields);
+            case 'array':   return $baseQuery->get($fields)->toArray($fields); 
+
+            // No valid option has been given so we run some exception. 
+            // With debugging message.
+            default: throw new RuntimeException('Type can only be "get" or "array"');
+        } 
+    }
 
     /**
      * Method for getting the data from a user out off the database.

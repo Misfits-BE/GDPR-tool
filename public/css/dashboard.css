@@ -15,6 +15,10 @@ body {
   margin-bottom: .25rem;
 }
 
+.full-length {
+  width: 100%;
+}
+
 @media (max-width: 991.98px) {
   .offcanvas-collapse {
     position: fixed;
