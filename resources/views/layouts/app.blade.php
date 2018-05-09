@@ -21,9 +21,7 @@
     <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" ></script>
-    <script src="{{ asset('js/dashboard.js') }}"></script>
-    <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
+    <script defer src="{{ asset('js/app.js') }}" ></script>
 </head>
 <body class="bg-light">
     <div id="app">
@@ -104,6 +102,8 @@
         </main>
     </div>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     {!! Toastr::message() !!} {{-- Notification partial --}}
 </body>
 </html>
