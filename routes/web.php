@@ -28,6 +28,7 @@ Route::get('/domains/create', 'DomainController@create')->name('domains.create')
 
 // API keys routes
 Route::get('/account-settings/api', 'ApiKeysController@index')->name('apikeys.index');
+Route::get('/api-tokens', 'ApiKeysController@getTokens');
 
 // Account settings route
 Route::get('/account-settings', 'Auth\SettingsController@index')->name('profile.settings');

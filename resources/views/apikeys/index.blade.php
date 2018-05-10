@@ -7,11 +7,7 @@
         </div>
 
         <div class="col-8">
-            <div class="card border-0 box-shadow">
-                <div class="card-body">
-                    <h6 class="border-bottom border-gray pb-2 mb-3">Your API keys</h6>
-                </div>
-            </div>
+            <api-keys></api-keys>
         </div>
     </div>
 @endsection

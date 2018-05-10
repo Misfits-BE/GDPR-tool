@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\ApiKeysResource;
 use App\Repositories\ApiKeyRepository;
 use Illuminate\View\View;
 
@@ -37,5 +38,10 @@ class ApiKeysController extends Controller
     public function index(): View
     {
         return view('apikeys.index');
+    }
+
+    public function getTokens()
+    {
+        return ApiKeysResource::collection($this->apikeysRepository->all());
     }
 }
