@@ -21,9 +21,9 @@
     <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" ></script>
-    <script src="{{ asset('js/dashboard.js') }}"></script>
-    <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
+    <script defer src="{{ asset('js/app.js') }}" ></script>
+    <script defer src="{{ asset('js/dashboard.js') }}"></script>
+    <script async async src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
 </head>
 <body class="bg-light">
     <div id="app">

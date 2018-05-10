@@ -26,6 +26,9 @@ Route::post('/users/store', 'UsersController@store')->name('users.store');
 Route::get('/domains', 'DomainController@index')->name('domains.index');
 Route::get('/domains/create', 'DomainController@create')->name('domains.create');
 
+// API keys routes
+Route::get('/account-settings/api', 'ApiKeysController@index')->name('apikeys.index');
+
 // Account settings route
 Route::get('/account-settings', 'Auth\SettingsController@index')->name('profile.settings');
 Route::get('/account-settings/security', 'Auth\SettingsController@formSecurity')->name('profile.settings.security');
