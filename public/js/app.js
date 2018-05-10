@@ -47286,7 +47286,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/components/ExampleComponent.vue"
+Component.options.__file = "resources\\assets\\js\\components\\ExampleComponent.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -47295,9 +47295,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-7168fb6a", Component.options)
+    hotAPI.createRecord("data-v-0ca92eac", Component.options)
   } else {
-    hotAPI.reload("data-v-7168fb6a", Component.options)
+    hotAPI.reload("data-v-0ca92eac", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -47375,7 +47375,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-7168fb6a", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-0ca92eac", module.exports)
   }
 }
 
@@ -47405,7 +47405,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/components/ApiKeyComponent.vue"
+Component.options.__file = "resources\\assets\\js\\components\\ApiKeyComponent.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -47414,9 +47414,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-b464609e", Component.options)
+    hotAPI.createRecord("data-v-fe2e8b1e", Component.options)
   } else {
-    hotAPI.reload("data-v-b464609e", Component.options)
+    hotAPI.reload("data-v-fe2e8b1e", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -47444,32 +47444,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    data: function data() {
-        return {
-            apiTokens: []
-        };
-    },
-    ready: function ready() {
-        this.prepareComponent();
-    },
     mounted: function mounted() {
-        this.prepareComponent();
-    },
-
-
-    methods: {
-        prepareComponent: function prepareComponent() {
-            this.getKeys();
-        },
-        getKeys: function getKeys() {
-            var _this = this;
-
-            axios.get('/api-tokens').then(function (response) {
-                _this.apiTokens = response.data.data;
-            });
-        }
+        console.log('Component mounted.');
     }
 });
 
@@ -47481,29 +47463,38 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "card border-0 box-shadow" }, [
-    _c("div", { staticClass: "card-body" }, [
-      _c("h6", { staticClass: "border-bottom border-gray pb-2 mb-3" }, [
-        _vm._v("Your API keys")
-      ]),
-      _vm._v(" "),
-      _vm.apiTokens.length === 0
-        ? _c("p", { staticClass: "mb-0" }, [
-            _vm._v(
-              "\n            You have not created any personal access tokens.\n        "
-            )
-          ])
-        : _vm._e()
-    ])
-  ])
+  return _vm._m(0)
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "container" }, [
+      _c("div", { staticClass: "row justify-content-center" }, [
+        _c("div", { staticClass: "col-md-8" }, [
+          _c("div", { staticClass: "card card-default" }, [
+            _c("div", { staticClass: "card-header" }, [
+              _vm._v("Example Component")
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "card-body" }, [
+              _vm._v(
+                "\n                    I'm an example component.\n                "
+              )
+            ])
+          ])
+        ])
+      ])
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-b464609e", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-fe2e8b1e", module.exports)
   }
 }
 

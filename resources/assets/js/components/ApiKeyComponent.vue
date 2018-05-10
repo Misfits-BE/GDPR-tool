@@ -1,40 +1,23 @@
 <template>
-    <div class="card border-0 box-shadow">
-        <div class="card-body">
-            <h6 class="border-bottom border-gray pb-2 mb-3">Your API keys</h6>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card card-default">
+                    <div class="card-header">Example Component</div>
 
-            <p class="mb-0" v-if="apiTokens.length === 0">
-                You have not created any personal access tokens.
-            </p>
+                    <div class="card-body">
+                        I'm an example component.
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </template>
 
 <script>
     export default {
-        data() {
-            return {
-                apiTokens: [],
-            }
-        },
-
-        ready() {
-            this.prepareComponent();
-        },
-
         mounted() {
-            this.prepareComponent();
-        },
-
-        methods: {
-            prepareComponent() {
-                this.getKeys();
-            },
-
-            getKeys() {
-                axios.get('/api-tokens')
-                    .then(response => { this.apiTokens = response.data.data; });
-            }
+            console.log('Component mounted.')
         }
     }
 </script>

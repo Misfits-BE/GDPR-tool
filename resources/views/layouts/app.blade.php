@@ -23,7 +23,6 @@
     <!-- Scripts -->
     <script defer src="{{ asset('js/app.js') }}" ></script>
     <script defer src="{{ asset('js/dashboard.js') }}"></script>
-    <script async async src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
 </head>
 <body class="bg-light">
     <div id="app">
@@ -104,6 +103,8 @@
         </main>
     </div>
 
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
     {!! Toastr::message() !!} {{-- Notification partial --}}
 </body>
 </html>
