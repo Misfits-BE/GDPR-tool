@@ -20,28 +20,28 @@
                             </tr>
                         </thead>
                         <tbody>
-                        @if (count($users) > 0) {{-- There are users found --}}
-                            <tr>
-                                @foreach ($users as $user)
-                                    <tr>
-                                        <td>{{ $user->name }}</td>
-                                        <td>{{ $user->email }}</td>
-                                        <td>{{ $user->created_at }}</td>
-                                        <td>
-                                            <a href="" class="text-danger text-right">
-                                                <i class="fas fa-times-circle"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tr>
-                        @else {{-- No users are found --}}
-                            <tr>
-                                <td colspan="5">
-                                    <small class="text-muted">There are no users found with the term. {{ $term }}}</small>
-                                </td>
-                            </tr>
-                        @endif
+                            @if (count($users) > 0) {{-- There are users found --}}
+                                <tr>
+                                    @foreach ($users as $user)
+                                        <tr>
+                                            <td>{{ $user->name }}</td>
+                                            <td>{{ $user->email }}</td>
+                                            <td>{{ $user->created_at }}</td>
+                                            <td>
+                                                <a href="" class="text-danger text-right">
+                                                    <i class="fas fa-times-circle"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tr>
+                            @else {{-- No users are found --}}
+                                <tr>
+                                    <td colspan="5">
+                                        <small class="text-muted">There are no users found with the term. {{ $term }}}</small>
+                                    </td>
+                                </tr>
+                            @endif
                         </tbody>
                     </table>
 

@@ -2,13 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\ApiKeysResource;
 use App\Repositories\ApiKeyRepository;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\Auth\ApiKeyValidator;
 use Toastr;
-use App\Repositories\UsersRepository;
 
 /**
  * Class ApiKeysController
@@ -22,22 +20,16 @@ class ApiKeysController extends Controller
     /** @var ApiKeyRepository $apikeysRepository The variable for the abstraction layer (MySQL: api_keys) */
     private $apikeysRepository;
 
-    /** @var UsersRepository $usersRepository The variable for the abstraction layer (MySQL: users) */
-    private $usersRepository; 
-
     /**
      * ApiKeysController constructor.
      *
-     * @param  UsersRepository  $usersRepository   The abstraction layer for the database abstraction layer. 
      * @param  ApiKeyRepository $apikeysRepository The abstraction layer for the database abstraction layer.
      * @return void
      */
-    public function __construct(ApiKeyRepository $apikeysRepository, UsersRepository $usersRepository)
+    public function __construct(ApiKeyRepository $apikeysRepository)
     {
         $this->middleware(['auth', 'role:admin']);
-
-        $this->usersRepository   = $usersRepository; 
-        $this->apikeysRepository = $apikeysRepository;
+        $this->apikeysRepository = $apikeysRepository; 
     }
 
     /**
@@ -47,7 +39,8 @@ class ApiKeysController extends Controller
      */
     public function index(): View
     {
-        return view('apikeys.index', ['apikeys' => $this->usersRepository->getUser()->apiKeys()->simplePaginate(10)]);
+        $authUser = auth()->user();
+        return view('apikeys.index', ['apikeys' => $authUser->apiKeys()->simplePaginate(10)]);
     }
 
     /**
@@ -61,9 +54,20 @@ class ApiKeysController extends Controller
     public function store(ApiKeyValidator $input): RedirectResponse
     {
         if ($this->apikeysRepository->registerApiKey($input)) {
+            // TODO: Replace toastr with a flash session. 
             Toastr::success("The api for the service <strong>{$input->service}</strong> has been created.", 'API key created!');
         }
 
         return redirect()->route('apikeys.index');
+    }
+
+    public function generate(): RedirectResponse
+    {
+
+    }
+
+    public function destroy(): RedirectResponse
+    {
+        
     }
 }
