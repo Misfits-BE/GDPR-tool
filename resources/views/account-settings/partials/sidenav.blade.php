@@ -10,6 +10,12 @@
     <a href="{{ route('profile.settings.security') }}" class="list-group-item list-group-item-action">
         <i class="fas fa-key fa-fw mr-1"></i> Account security
     </a>
+
+    @if ($currentUser->hasRole('admin'))
+        <a href="{{ route('apikeys.index') }}" class="list-group-item list-group-item-action">
+            <i class="fas fa-code fa-mr mr-1"></i> API key management
+        </a>
+    @endif
 </div>
 
 <div class="list-group border-0 box-shadow my-3">

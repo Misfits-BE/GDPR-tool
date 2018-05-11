@@ -4,6 +4,7 @@ namespace App\Composers;
 
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\View\View;
+use App\Repositories\UsersRepository;
 
 /**
  * Class GlobalComposer
@@ -18,15 +19,21 @@ class GlobalComposer
 {
     /** @var \Illuminate\Contracts\Auth\Guard $auth  */
     protected $auth;
+
+    /** @var UserRepository $userRepository Variable for the database abstraction layer (MySQL: users) */
+    private $userRepository;
+    
     /**
      * Create a new global layout composer.
      *
-     * @param  Guard $auth  The authentication guard.
+     * @param  Guard          $auth             The authentication guard.
+     * @param  UserRepository $userRepository   The abstraction for the users table. (MySQL: users)
      * @return void
      */
-    public function __construct(Guard $auth)
+    public function __construct(Guard $auth, UsersRepository $userRepository)
     {
-        $this->auth = $auth;
+        $this->auth           = $auth;
+        $this->userRepository = $userRepository;
     }
     /**
      * Bind data to the view
@@ -36,6 +43,7 @@ class GlobalComposer
      */
     public function compose(View $view): void
     {
-        $view->with('currentUser', $this->auth->user());    // Global variable for the authenticated user data
+        $view->with('currentUser', $this->auth->user()); // Global variable for the authenticated user data
+        $view->with('countUsers',  $this->userRepository->entity()->count()); // Global variable for the users count in the app.
     }
 }

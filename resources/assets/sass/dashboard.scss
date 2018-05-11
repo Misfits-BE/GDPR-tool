@@ -7,6 +7,14 @@ body {
   padding-top: 56px;
 }
 
+.table th.no-border {
+  border-top: none;
+}
+
+.table-border-margin {
+  margin-bottom: .25rem;
+}
+
 @media (max-width: 991.98px) {
   .offcanvas-collapse {
     position: fixed;

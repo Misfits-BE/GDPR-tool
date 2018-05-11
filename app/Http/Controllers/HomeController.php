@@ -37,6 +37,6 @@ class HomeController extends Controller
      */
     public function index(): View
     {
-        return view('home', ['domains' => $this->domainRepository->getDashboardresults()]);
+        return view('home', ['domains' => $this->domainRepository->getDashboardResults()]);
     }
 }

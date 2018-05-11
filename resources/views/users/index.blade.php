@@ -14,34 +14,34 @@
                     <table class="table table-sm">
                         <thead>
                             <tr>
-                                <th scope="col">Name</th>
-                                <th scope="col">Email</th>
-                                <th colspan="2">Registered at</th> {{-- Colspan 2 needed for the functions --}}
+                                <th class="no-border" scope="col">Name</th>
+                                <th class="no-border" scope="col">Email</th>
+                                <th class="no-border" scope="col" colspan="2">Registered at</th> {{-- Colspan 2 needed for the functions --}}
                             </tr>
                         </thead>
                         <tbody>
-                        @if (count($users) > 0) {{-- There are users found --}}
-                            <tr>
-                                @foreach ($users as $user)
-                                    <tr>
-                                        <td>{{ $user->name }}</td>
-                                        <td>{{ $user->email }}</td>
-                                        <td>{{ $user->created_at }}</td>
-                                        <td>
-                                            <a href="" class="text-danger text-right">
-                                                <i class="fas fa-times-circle"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tr>
-                        @else {{-- No users are found --}}
-                            <tr>
-                                <td colspan="5">
-                                    <small class="text-muted">There are no users found with the term. {{ $term }}}</small>
-                                </td>
-                            </tr>
-                        @endif
+                            @if (count($users) > 0) {{-- There are users found --}}
+                                <tr>
+                                    @foreach ($users as $user)
+                                        <tr>
+                                            <td>{{ $user->name }}</td>
+                                            <td>{{ $user->email }}</td>
+                                            <td>{{ $user->created_at }}</td>
+                                            <td>
+                                                <a href="" class="text-danger text-right">
+                                                    <i class="fas fa-times-circle"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tr>
+                            @else {{-- No users are found --}}
+                                <tr>
+                                    <td colspan="5">
+                                        <small class="text-muted">There are no users found with the term. {{ $term }}}</small>
+                                    </td>
+                                </tr>
+                            @endif
                         </tbody>
                     </table>
 

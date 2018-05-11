@@ -7,13 +7,13 @@
         </h6>
 
         <div class="pt-2 border-bottom">
-            <table class="table-borderless table table-sm">
+            <table class="table-borderless table-border-margin table table-sm">
                 <thead>
                 <tr>
-                    <th class="ml-0" scope="col">Name</th>
-                    <th scope="col">DPO</th>
-                    <th>Concerns</th>
-                    <th colspan="2">Registered at</th> {{-- Colspan 2 needed for the functions --}}
+                    <th class="no-border" scope="col">Name</th>
+                    <th class="no-border" scope="col">DPO</th>
+                    <th class="no-border" scope="col">Concerns</th>
+                    <th class="no-border" scope="col" colspan="2">Registered at</th> {{-- Colspan 2 needed for the functions --}}
                 </tr>
                 </thead>
                 <tbody>
