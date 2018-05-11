@@ -35,7 +35,23 @@ class ApiKeyRepository extends Repository
         if ($apiKey = auth()->user()->createApiKey()) {
             $apiKey->update(['service' => $input->service]);
 
+            //! $apikey method not chained becasue maybe on later basis,  
+            //! we need to send notifications to the user.
+
             return $apiKey;
         }
+    }
+
+    /**
+     * Formatter for the flash message data
+     * 
+     * @param  string $title    The title for the flash session
+     * @param  string $message  The message for the flash session
+     * @param  string $level    The level for the flash session. Also known as CSS class default to success.
+     * @return array
+     */
+    public function flashOutput(string $title, string $message, string $level = 'success'): array 
+    {
+        return ['flash-message' => ['level' => $level, 'title' => $title, 'content' => $message]];
     }
 }

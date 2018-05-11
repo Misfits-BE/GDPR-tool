@@ -2,11 +2,11 @@
 
 @section('content')
     <div class="row my-3">
-        <div class="col-4">
+        <div class="col-3">
             @include ('account-settings.partials.sidenav')
         </div>
 
-        <div class="col-8">
+        <div class="col-9">
             <div class="card border-0 box-shadow">
                 <div class="card-body">
                     <h6 class="border-bottom border-gray pb-2 mb-3">Account security</h6>

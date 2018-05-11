@@ -2,11 +2,28 @@
 
 @section('content')
     <div class="row my-3">
-        <div class="col-4">
+        @if (session()->has('flash-message'))
+            <div class="col-12">
+                <div class="alert mb-3 border-0 box-shadow alert-dismissable alert-{{ session()->get('flash-message.level') }}" role="alert">
+                    <h4 class="alert-heading">{{ session()->get('flash-message.title') }}</h4>
+                    <p class="mb-0">{{ session()->get('flash-message.content') }}</p>
+                    
+                    <hr class="mb-2 mt-2">
+
+                    @if (session()->has('undo'))
+                        <a href="{{ session()->get('undo.route') }}" class="btn btn-sm btn-outline-{{ session()->get('flash-message.level') }} mb-0">Undo delete</a>
+                    @endif 
+
+                    <button data-dismiss="alert" class="btn btn-sm btn-outline-{{ session()->get('flash-message.level') }}">Close</button>
+                </div>
+            </div>
+        @endif
+
+        <div class="col-3">
             @include('account-settings.partials.sidenav')
         </div>
 
-        <div class="col-8">
+        <div class="col-9">
             <div class="card border-0 mb-3 box-shadow">
                 <div class="card-body">
                     <h6 class="border-bottom border-gray pb-2 mb-3">Create new API key.</h6>
@@ -49,10 +66,10 @@
                                             <td> {{-- Options --}}
                                                 <span class="float-right">
                                                     <a href="" class="text-muted">
-                                                        <i class="fas fa-fw fa-sync-alt"></i>
+                                                        <i class="fas mr-1 fa-sync-alt"></i>
                                                     </a>
 
-                                                    <a href="" class="text-danger">
+                                                    <a href="{{ route('apikeys.delete', $key) }}" class="text-danger">
                                                         <i class="fas fa-times-circle"></i>
                                                     </a>
                                                 </span>

@@ -6,7 +6,8 @@ use App\Repositories\ApiKeyRepository;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\Auth\ApiKeyValidator;
-use Toastr;
+use Mpociot\Reanimate\ReanimateModels;
+use Misfits\ApiGuard\Models\ApiKey;
 
 /**
  * Class ApiKeysController
@@ -17,6 +18,8 @@ use Toastr;
  */
 class ApiKeysController extends Controller
 {
+    use ReanimateModels; // Trait ReanimateModels is need for undo a key delete when needed.
+
     /** @var ApiKeyRepository $apikeysRepository The variable for the abstraction layer (MySQL: api_keys) */
     private $apikeysRepository;
 
@@ -44,7 +47,7 @@ class ApiKeysController extends Controller
     }
 
     /**
-     * Controller for registering a new api token in the application. 
+     * Controller for registering a new API token in the application. 
      * 
      * @todo Register activity logger
      * 
@@ -53,21 +56,47 @@ class ApiKeysController extends Controller
      */
     public function store(ApiKeyValidator $input): RedirectResponse
     {
-        if ($this->apikeysRepository->registerApiKey($input)) {
-            // TODO: Replace toastr with a flash session. 
-            Toastr::success("The api for the service <strong>{$input->service}</strong> has been created.", 'API key created!');
+        if ($apikey = $this->apikeysRepository->registerApiKey($input)) {
+            $flash = $this->apikeysRepository->flashOutput(__('apikeys.flash.store-title'), __('apikeys.flash.store-message', ['name' => $apikey->service]));
         }
 
-        return redirect()->route('apikeys.index');
+        return redirect()->route('apikeys.index')->with($flash);
     }
 
-    public function generate(): RedirectResponse
+    /**
+     * Delete some api key in the application. 
+     * 
+     * @todo Implement activity logger.
+     * 
+     * @param  int $apikey  The unique identifier from the key in the database storage.
+     * @return RedirectResponse
+     */
+    public function destroy(int $apikey): RedirectResponse
     {
-
-    }
-
-    public function destroy(): RedirectResponse
-    {
+        $apikey = $this->apikeysRepository->findOrFail($apikey); 
         
+        if ($apikey->delete()) { // The API key has been deleted.
+            $flash = $this->apikeysRepository->flashOutput(__('apikeys.flash.delete-title'), __('apikeys.flash.delete-message', ['name' => $apikey->service]));
+        } 
+
+        return redirect()->route('apikeys.index')->with($flash)->with($this->undoFlash($apikey, "api-tokens/undo/{$apikey->id}"));
+    }
+
+    public function regenerate(int $apikey): RedirectResponse
+    {
+        //
+    }
+
+    /**
+     * Revert the deleted api key. 
+     * 
+     * @todo Implement activity logger
+     * 
+     * @param  int $apikey  The unique identifier from the key in the database storage.
+     * @return RedirectResponse
+     */
+    public function undo(int $apikey): RedirectResponse
+    {
+        //
     }
 }
