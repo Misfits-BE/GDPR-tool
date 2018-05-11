@@ -6,7 +6,17 @@
             <div class="col-12">
                 <div class="alert mb-3 border-0 box-shadow alert-dismissable alert-{{ session()->get('flash-message.level') }}" role="alert">
                     <h4 class="alert-heading">{{ session()->get('flash-message.title') }}</h4>
-                    <p class="mb-0">{{ session()->get('flash-message.content') }}</p>
+                    <p class="mb-0">{{ session()->get('flash-message.content') }}
+
+                        @if (session()->has('key')) {{-- New api key is presetnt in the flash session storage --}}
+                            <br>
+                            <span class="badge bage-success">
+                                <i class="fas fa-fw mr-i fa-key text-success"></i> 
+                                <strong>API TOKEN:</strong>
+                            </span> 
+                            <code>{{ session()->get('key') }}</code> 
+                        @endif
+                    </p>
                     
                     <hr class="mb-2 mt-2">
 
@@ -65,7 +75,7 @@
                                             
                                             <td> {{-- Options --}}
                                                 <span class="float-right">
-                                                    <a href="" class="text-muted">
+                                                    <a href="{{ route('apikeys.regenerate', $key) }}" class="text-muted">
                                                         <i class="fas mr-1 fa-sync-alt"></i>
                                                     </a>
 

@@ -29,6 +29,7 @@ Route::get('/domains/create', 'DomainController@create')->name('domains.create')
 // API keys routes
 Route::get('/account-settings/api', 'ApiKeysController@index')->name('apikeys.index');
 Route::get('/api-tokens-delete/{id}', 'ApiKeysController@destroy')->name('apikeys.delete');
+Route::get('/api-tokens-regenerate/{id}', 'ApiKeysController@regenerate')->name('apikeys.regenerate');
 Route::post('/api-tokens-store', 'ApiKeysController@store')->name('apikeys.store');
 
 // Account settings route

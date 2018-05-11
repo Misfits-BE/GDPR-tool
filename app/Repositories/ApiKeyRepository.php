@@ -54,4 +54,9 @@ class ApiKeyRepository extends Repository
     {
         return ['flash-message' => ['level' => $level, 'title' => $title, 'content' => $message]];
     }
+
+    public function regenerateKey()
+    {
+        return ApiKey::generateKey();
+    }
 }

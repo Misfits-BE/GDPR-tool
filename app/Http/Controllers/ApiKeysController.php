@@ -7,7 +7,6 @@ use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\Auth\ApiKeyValidator;
 use Mpociot\Reanimate\ReanimateModels;
-use Misfits\ApiGuard\Models\ApiKey;
 
 /**
  * Class ApiKeysController
@@ -57,7 +56,9 @@ class ApiKeysController extends Controller
     public function store(ApiKeyValidator $input): RedirectResponse
     {
         if ($apikey = $this->apikeysRepository->registerApiKey($input)) {
-            $flash = $this->apikeysRepository->flashOutput(__('apikeys.flash.store-title'), __('apikeys.flash.store-message', ['name' => $apikey->service]));
+            $flash = $this->apikeysRepository->flashOutput(
+                __('apikeys.flash.store-title'), __('apikeys.flash.store-message', ['name' => $apikey->service])
+            );
         }
 
         return redirect()->route('apikeys.index')->with($flash);
@@ -76,16 +77,34 @@ class ApiKeysController extends Controller
         $apikey = $this->apikeysRepository->findOrFail($apikey); 
         
         if ($apikey->delete()) { // The API key has been deleted.
-            $msgFlash  = $this->apikeysRepository->flashOutput(__('apikeys.flash.delete-title'), __('apikeys.flash.delete-message', ['name' => $apikey->service]));
             $undoFlash = $this->undoFlash($apikey, "api-tokens/undo/{$apikey->id}");
+            $msgFlash  = $this->apikeysRepository->flashOutput(
+                __('apikeys.flash.delete-title'), __('apikeys.flash.delete-message', ['name' => $apikey->service])
+            );
         } 
 
         return redirect()->route('apikeys.index')->with($msgFlash)->with($undoFlash);
     }
 
+    /**
+     * Regenerate a new API key for the existing service.
+     *
+     * @param  int $apikey  The unique identifier from the key in the database storage.
+     * @return RedirectResponse
+     */
     public function regenerate(int $apikey): RedirectResponse
     {
-        //
+        $apikey = $this->apikeysRepository->findOrFail($apikey);
+        $newkey = $this->apikeysRepository->regenerateKey();
+
+        if ($apikey->update(['key' => $newkey])) {
+            $keyFlash = ['key' => $newkey];
+            $msgFlash = $this->apikeysRepository->flashOutput(
+                __('apikeys.flash.regenerate-title'), __('apikeys.flash.regenerate-message', ['name' => $apikey->service])
+            );
+        }
+
+        return redirect()->route('apikeys.index')->with(array_merge($keyFlash, $msgFlash));
     }
 
     /**
