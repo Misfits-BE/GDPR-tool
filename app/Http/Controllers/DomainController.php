@@ -54,12 +54,7 @@ class DomainController extends Controller
      */
     public function index(Request $input): View
     {
-        if (! is_null($input->term)) { 
-            //! The term is not empty so the user tries to performs a search on the domains table
-            $this->domainRepository->applyCriteria(new DomainSearchCriteria($input->term));
-        }
-
-        $domains = $this->domainRepository->with(['dpo', 'concerns'])->simplePaginate(15); 
+        $domains = $this->domainRepository->getDomains($input->term, 15); 
         $term    = $input->term;
 
         return view('domains.index', compact('domains', 'term'));
