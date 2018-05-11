@@ -7,6 +7,7 @@ use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\Auth\ApiKeyValidator;
 use Mpociot\Reanimate\ReanimateModels;
+use App\Repositories\ActivityRepository;
 
 /**
  * Class ApiKeysController
@@ -22,16 +23,22 @@ class ApiKeysController extends Controller
     /** @var ApiKeyRepository $apikeysRepository The variable for the abstraction layer (MySQL: api_keys) */
     private $apikeysRepository;
 
+    /** @var ActivityRepository $activityRepository The variable for the abstraction layer (MySQL: actibity_log) */
+    private $activityRepository;
+
     /**
      * ApiKeysController constructor.
      *
-     * @param  ApiKeyRepository $apikeysRepository The abstraction layer for the database abstraction layer.
+     * @param  ApiKeyRepository   $apikeysRepository    The abstraction layer for the database abstraction layer.
+     * @param  ActivityRepository $activityRepository   The abstraction layer for the activity database abstraction layer. 
      * @return void
      */
-    public function __construct(ApiKeyRepository $apikeysRepository)
+    public function __construct(ApiKeyRepository $apikeysRepository, ActivityRepository $activityRepository)
     {
         $this->middleware(['auth', 'role:admin']);
-        $this->apikeysRepository = $apikeysRepository; 
+
+        $this->apikeysRepository  = $apikeysRepository; 
+        $this->activityRepository = $activityRepository;
     }
 
     /**
@@ -48,8 +55,6 @@ class ApiKeysController extends Controller
     /**
      * Controller for registering a new API token in the application. 
      * 
-     * @todo Register activity logger
-     * 
      * @param  ApiKeyValidator $input The validation class for the form inputs
      * @return RedirectResponse
      */
@@ -59,6 +64,8 @@ class ApiKeysController extends Controller
             $flash = $this->apikeysRepository->flashOutput(
                 __('apikeys.flash.store-title'), __('apikeys.flash.store-message', ['name' => $apikey->service])
             );
+
+            $this->activityRepository->registerActivity($apikey, __('apikeys.activity.create'));
         }
 
         return redirect()->route('apikeys.index')->with($flash);
@@ -66,8 +73,6 @@ class ApiKeysController extends Controller
 
     /**
      * Delete some api key in the application. 
-     * 
-     * @todo Implement activity logger.
      * 
      * @param  int $apikey  The unique identifier from the key in the database storage.
      * @return RedirectResponse
@@ -81,6 +86,8 @@ class ApiKeysController extends Controller
             $msgFlash  = $this->apikeysRepository->flashOutput(
                 __('apikeys.flash.delete-title'), __('apikeys.flash.delete-message', ['name' => $apikey->service])
             );
+
+            $this->activityRepository->registerActivity($apikey, __('apikeys.activity.delete'));
         } 
 
         return redirect()->route('apikeys.index')->with($msgFlash)->with($undoFlash);
@@ -102,6 +109,8 @@ class ApiKeysController extends Controller
             $msgFlash = $this->apikeysRepository->flashOutput(
                 __('apikeys.flash.regenerate-title'), __('apikeys.flash.regenerate-message', ['name' => $apikey->service])
             );
+
+            $this->activityRepository->registerActivity($apikey, __('apikeys.activity.regenerate'));
         }
 
         return redirect()->route('apikeys.index')->with(array_merge($keyFlash, $msgFlash));
