@@ -8,7 +8,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Repositories\Criteria\Domains\DomainSearchCriteria;
 use App\Repositories\UsersRepository;
-use function bar\baz\foo;
+use App\Http\Requests\Domains\Web\CreateValidator;
 
 /**
  * Class DomainController
@@ -74,11 +74,12 @@ class DomainController extends Controller
     /**
      * Store the new project domain in the database.
      *
+     * @param  CreateValidator $input The validator for the given user input. 
      * @return RedirectResponse
      */
-    public function store(): RedirectResponse
+    public function store(CreateValidator $input): RedirectResponse
     {
-        //
+        dd($input->all());
     }
 
     /**

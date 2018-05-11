@@ -119,8 +119,6 @@ class ApiKeysController extends Controller
     /**
      * Revert the deleted api key. 
      * 
-     * @todo Implement activity logger
-     * 
      * @param  int $apikey  The unique identifier from the key in the database storage.
      * @return RedirectResponse
      */
