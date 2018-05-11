@@ -30,6 +30,7 @@ Route::get('/domains/create', 'DomainController@create')->name('domains.create')
 Route::get('/account-settings/api', 'ApiKeysController@index')->name('apikeys.index');
 Route::get('/api-tokens-delete/{id}', 'ApiKeysController@destroy')->name('apikeys.delete');
 Route::get('/api-tokens-regenerate/{id}', 'ApiKeysController@regenerate')->name('apikeys.regenerate');
+Route::get('/api-tokens/undo/{id}', 'ApiKeysController@undo')->name('apikeys.undo');
 Route::post('/api-tokens-store', 'ApiKeysController@store')->name('apikeys.store');
 
 // Account settings route

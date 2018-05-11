@@ -8,6 +8,7 @@ use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\Auth\ApiKeyValidator;
 use Mpociot\Reanimate\ReanimateModels;
 use App\Repositories\ActivityRepository;
+use Misfits\ApiGuard\Models\ApiKey;
 
 /**
  * Class ApiKeysController
@@ -68,7 +69,7 @@ class ApiKeysController extends Controller
             $this->activityRepository->registerActivity($apikey, __('apikeys.activity.create'));
         }
 
-        return redirect()->route('apikeys.index')->with($flash);
+        return redirect()->route('apikeys.index')->with(array_merge(['key' => $apikey->key], $flash));
     }
 
     /**
@@ -82,7 +83,7 @@ class ApiKeysController extends Controller
         $apikey = $this->apikeysRepository->findOrFail($apikey); 
         
         if ($apikey->delete()) { // The API key has been deleted.
-            $undoFlash = $this->undoFlash($apikey, "api-tokens/undo/{$apikey->id}");
+            $undoFlash = $this->undoFlash($apikey, route('apikeys.undo', $apikey));
             $msgFlash  = $this->apikeysRepository->flashOutput(
                 __('apikeys.flash.delete-title'), __('apikeys.flash.delete-message', ['name' => $apikey->service])
             );
@@ -105,7 +106,6 @@ class ApiKeysController extends Controller
         $newkey = $this->apikeysRepository->regenerateKey();
 
         if ($apikey->update(['key' => $newkey])) {
-            $keyFlash = ['key' => $newkey];
             $msgFlash = $this->apikeysRepository->flashOutput(
                 __('apikeys.flash.regenerate-title'), __('apikeys.flash.regenerate-message', ['name' => $apikey->service])
             );
@@ -113,7 +113,7 @@ class ApiKeysController extends Controller
             $this->activityRepository->registerActivity($apikey, __('apikeys.activity.regenerate'));
         }
 
-        return redirect()->route('apikeys.index')->with(array_merge($keyFlash, $msgFlash));
+        return redirect()->route('apikeys.index')->with(array_merge(['key' => $newkey], $msgFlash));
     }
 
     /**
@@ -126,6 +126,6 @@ class ApiKeysController extends Controller
      */
     public function undo(int $apikey): RedirectResponse
     {
-        //
+        return $this->restoreModel($apikey, new ApiKey(),'apikeys.index');
     }
 }
