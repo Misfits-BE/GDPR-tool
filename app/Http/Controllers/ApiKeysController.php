@@ -76,10 +76,11 @@ class ApiKeysController extends Controller
         $apikey = $this->apikeysRepository->findOrFail($apikey); 
         
         if ($apikey->delete()) { // The API key has been deleted.
-            $flash = $this->apikeysRepository->flashOutput(__('apikeys.flash.delete-title'), __('apikeys.flash.delete-message', ['name' => $apikey->service]));
+            $msgFlash  = $this->apikeysRepository->flashOutput(__('apikeys.flash.delete-title'), __('apikeys.flash.delete-message', ['name' => $apikey->service]));
+            $undoFlash = $this->undoFlash($apikey, "api-tokens/undo/{$apikey->id}");
         } 
 
-        return redirect()->route('apikeys.index')->with($flash)->with($this->undoFlash($apikey, "api-tokens/undo/{$apikey->id}"));
+        return redirect()->route('apikeys.index')->with($msgFlash)->with($undoFlash);
     }
 
     public function regenerate(int $apikey): RedirectResponse
