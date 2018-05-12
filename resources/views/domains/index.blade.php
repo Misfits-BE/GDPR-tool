@@ -16,6 +16,7 @@
                             <tr>
                                 <th class="no-border" scope="col">Name</th>
                                 <th class="no-border" scope="col">DPO</th>
+                                <th class="no-border" scope="col"></th>
                                 <th colspan="2" class="no-border" scope="col">Registered at</th> {{-- Colspan 2 needed for the functions --}}
                             </tr>
                         </thead>
@@ -24,19 +25,27 @@
                                 @foreach ($domains as $domain) {{-- Loop through the domains --}}
                                     <tr>
                                         <td><a href="{{ $domain->url }}">{{ $domain->name }}</a></td>
-                                        <td>{{ $domain->dpo->name }}</td>
+                                        <td>{{ ucfirst($domain->dpo->name) }}</td>
 
                                         <td> {{-- Concerns --}}
-                                            <a href="" class="label label-success">
+                                            <a href="" class="badge badge-success">
                                                 {{ $domain->concerns()->open()->count() }} Open
                                             </a>
 
-                                            <a href="" class="label label-danger">
+                                            <a href="" class="badge badge-danger">
                                                 {{ $domain->concerns()->closed()->count() }} Closed
                                             </a>
                                         </td> {{-- /// Concerns --}}
 
                                         <td><span class="text-muted">{{ $domain->created_at->diffForHumans() }}</span></td>
+
+                                        <td>
+                                            <span class="float-right">
+                                                <a href="" class="text-danger">
+                                                    <i class="fas fa-fw fa-times-circle"></i>
+                                                </a>
+                                            </span>
+                                        </td>
                                     </tr>
                                 @endforeach {{-- END domain loop --}}
                             @else {{-- There are no domains found --}}

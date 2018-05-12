@@ -10,7 +10,7 @@
             <div class="card card-body border-0 box-shadow">
                 <h6 class="border-bottom border-gray pb-2 mb-3">Add new domain</h6>
 
-                <form method="POST" action="">
+                <form method="POST" action="{{ route('domains.store') }}">
                     @csrf {{-- Form field protection --}}
 
                     <div class="form-group row">
@@ -42,7 +42,7 @@
                         <label for="dpo" class="col-3 col-form-label">Data Protection Officer <span class="input-required">*</span></label>
 
                         <div class="col-9">
-                            <select @input('pdo_id') id="pdo" class="form-control @error('dpo', 'is-invalid')">
+                            <select @input('dpo_id') id="pdo" class="form-control @error('dpo', 'is-invalid')">
                                 <option value="">-- Select platform DPO --</option>
 
                                 @foreach ($dpos as $dpo) {{-- DPO loop --}}
@@ -53,7 +53,7 @@
                             </select>
 
                             {{-- Validation error view partial --}}
-                            @error('pdo_id', '<div class="invalid-feedback">:message</div>')
+                            @error('dpo_id', '<div class="invalid-feedback">:message</div>')
                         </div>
                     </div>
 

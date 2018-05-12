@@ -8,7 +8,9 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Repositories\Criteria\Domains\DomainSearchCriteria;
 use App\Repositories\UsersRepository;
-use function bar\baz\foo;
+use App\Http\Requests\Domains\Web\CreateValidator;
+use App\Repositories\ActivityRepository;
+use Toastr;
 
 /**
  * Class DomainController
@@ -25,19 +27,24 @@ class DomainController extends Controller
     /** @var UsersRepository $userRepository The variable for the users abstraction layer. (MySQL: users) */
     private $userRepository; 
 
+    /** @var ActivityRepository $activityRepository The variable for the logs abstraction layer. (MySQL: activity_log) */
+    private $activityRepository;
+
     /**
      * DomainController constructor 
      * 
-     * @param  DomainRepository $domainRepository The abstraction layer between database and controller (MySQL: Domains)
-     * @param  UsersRepository  $usersRepository  The abstraction layer between database and controller (MySQL: users)
+     * @param  DomainRepository   $domainRepository     The abstraction layer between database and controller (MySQL: Domains)
+     * @param  UsersRepository    $usersRepository      The abstraction layer between database and controller (MySQL: users)
+     * @param  ActivityRepository $activityRepository   The abstraction layer between database and controller (MySQL: activity_log)
      * @return void
      */
-    public function __construct(DomainRepository $domainRepository, UsersRepository $userRepository)
+    public function __construct(DomainRepository $domainRepository, UsersRepository $userRepository, ActivityRepository $activityRepository)
     {
         $this->middleware(['auth', 'role:admin']); 
 
-        $this->userRepository   = $userRepository;
-        $this->domainRepository = $domainRepository;
+        $this->userRepository     = $userRepository;
+        $this->domainRepository   = $domainRepository;
+        $this->activityRepository = $activityRepository;
     }
 
     /**
@@ -47,12 +54,7 @@ class DomainController extends Controller
      */
     public function index(Request $input): View
     {
-        if (! is_null($input->term)) { 
-            //! The term is not empty so the user tries to performs a search on the domains table
-            $this->domainRepository->applyCriteria(new DomainSearchCriteria($input->term));
-        }
-
-        $domains = $this->domainRepository->with(['dpo', 'concern'])->simplePaginate(15); 
+        $domains = $this->domainRepository->getDomains($input->term, 15); 
         $term    = $input->term;
 
         return view('domains.index', compact('domains', 'term'));
@@ -74,11 +76,19 @@ class DomainController extends Controller
     /**
      * Store the new project domain in the database.
      *
+     * @todo Implement phpunit test
+     * 
+     * @param  CreateValidator $input The validator for the given user input. 
      * @return RedirectResponse
      */
-    public function store(): RedirectResponse
+    public function store(CreateValidator $input): RedirectResponse
     {
-        //
+        if ($domain = $this->domainRepository->create($input->all())) {
+            $this->activityRepository->registerActivity($domain, __('domains.activity.store', ['name' => $domain->name]));
+            Toastr::success("The domain '{$domain->name} has been saved.'", 'Domain created.');
+        }
+
+        return redirect()->route('domains.show', $domain);
     }
 
     /**

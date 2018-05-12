@@ -22,6 +22,7 @@
 
     <!-- Scripts -->
     <script defer src="{{ asset('js/app.js') }}" ></script>
+    <script defer src="{{ asset('js/dashboard.js') }}"></script>
 </head>
 <body class="bg-light">
     <div id="app">

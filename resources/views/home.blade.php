@@ -7,7 +7,7 @@
         </h6>
 
         <div class="pt-2 border-bottom">
-            <table class="table-borderless table-border-margin table table-sm">
+            <table class="table-hover table-borderless table-border-margin table table-sm">
                 <thead>
                 <tr>
                     <th class="no-border" scope="col">Name</th>
@@ -17,16 +17,23 @@
                 </tr>
                 </thead>
                 <tbody>
-                    <td><a href="">Laravel.dev</a></td>
-                    <td>Tim Joosten</td>
-                    <td>
-                        <span class="badge badge-danger">32 open</span>
-                        <span class="badge badge-success">27 closed</span>
-                    </td>
-                    <td><span class="text-muted">3 Minutes ago</span></td>
-                    <td>
-                        <a href="#"><i class="far fa-eye"></i> View</a>
-                    </td>
+                    @if (count($domains) > 0) {{-- There are domains registered in the application --}}
+                        @foreach ($domains as $domain) {{-- Loop through the domains --}}
+                            <tr>
+                                <td><a target="_blank" href="{{ $domain->url }}">{{ $domain->name }}</a></td>
+                                <td>{{ $domain->dpo->name }}</td>
+                                <td>
+                                    <span class="badge badge-danger">32 open</span>
+                                    <span class="badge badge-success">27 closed</span>
+                                </td>
+                                <td><span class="text-muted">{{ $domain->created_at->diffForHumans() }}</span></td>
+                                <td>
+                                    <a href="#"><i class="far fa-eye"></i> View</a>
+                                </td>
+                            </tr>
+                        @endforeach {{-- /// END loop --}}
+                    @else {{-- No domain registered in the application --}}
+                    @endif
                 </tbody>
             </table>
         </div>
