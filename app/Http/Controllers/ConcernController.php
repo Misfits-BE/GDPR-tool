@@ -27,4 +27,17 @@ class ConcernController extends Controller
     {
         return view('concerns.admin.index');
     }
+
+    /**
+     * Get the rceate view for a new privacy concern. (Backend)
+     * 
+     * @todo Implement phpunit
+     * @todo Implement view
+     * 
+     * @return View 
+     */
+    public function create(): View 
+    {
+        return view('concerns.shared.create');
+    }
 }

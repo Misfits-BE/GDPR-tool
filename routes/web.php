@@ -29,6 +29,7 @@ Route::post('/domains/create', 'DomainController@store')->name('domains.store');
 
 // Concern routes 
 Route::get('/concerns', 'ConcernController@index')->name('concern.index');
+Route::get('/concerns/create', 'ConcernController@create')->name('concern.create');
 
 // API keys routes
 Route::get('/account-settings/api', 'ApiKeysController@index')->name('apikeys.index');
