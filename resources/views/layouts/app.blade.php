@@ -91,7 +91,7 @@
                     <a class="nav-link" href="{{ route('domains.index') }}"><i class="fas fa-fw fa-link"></i> Domains</a>
 
                     @if ($currentUser->hasRole('admin'))
-                        <a class="nav-link" href=""><i class="fas fa-tags"></i> Privacy categories</a>
+                        <a class="nav-link" href="{{ route('privacy.categories.index') }}"><i class="fas fa-tags"></i> Privacy categories</a>
                         <a class="nav-link" href=""><i class="fas fa-fw fa-th-list"></i> Logs</a>
                         <a class="nav-link" href=""><i class="fas fa-fw fa-book"></i> API Docs</a>
                     @endif

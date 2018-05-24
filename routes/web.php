@@ -31,6 +31,9 @@ Route::post('/domains/create', 'DomainController@store')->name('domains.store');
 Route::get('/concerns', 'ConcernController@index')->name('concern.index');
 Route::get('/concerns/create', 'ConcernController@create')->name('concern.create');
 
+// Privacy Category routes 
+Route::get('/categories', 'Categories\CategoryController@index')->name('privacy.categories.index');
+
 // API keys routes
 Route::get('/account-settings/api', 'ApiKeysController@index')->name('apikeys.index');
 Route::get('/api-tokens-delete/{id}', 'ApiKeysController@destroy')->name('apikeys.delete');
