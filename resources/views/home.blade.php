@@ -54,7 +54,7 @@
             </div>
         </div>
         <small class="d-block text-right mt-3">
-            <a href="">View all concerns</a> -
+            <a href="{{ route('concern.index') }}">View all concerns</a> -
             <a href="">Create concern</a>
         </small>
     </div>

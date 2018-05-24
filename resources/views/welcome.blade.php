@@ -12,12 +12,12 @@
           <hr class="my-3"> 
             
             <p class="lead">
-                <a href="" role="button" class="btn btn-outline-primary btn-lg">
-                    <i class="fa fa-info-circle"></i> Onze visie
+                <a href="{{ route('login') }}" role="button" class="btn btn-outline-primary btn-lg">
+                    <i class="fas fa-sign-in-alt"></i> Login
                 </a> 
                 
-                <a href="" role="button" class="btn btn-outline-primary btn-lg">
-                    <i class="fa fa-heart text-danger"></i> Ondersteun ons
+                <a href="{{ route('register') }}" role="button" class="btn btn-outline-primary btn-lg">
+                    <i class="fas fa-user-plus"></i> Register
                 </a>
             </p>
         </div>
@@ -35,8 +35,12 @@
                                 @csrf {{-- Form field protection --}}
 
                                 <div class="form-group">
-                                    <label for="formGroupExampleInput">Example label <span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control col-md-7" id="formGroupExampleInput" placeholder="Example input">
+                                    <label for="your-name">Your name: <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control col-md-7" id="tou" placeholder="Example input">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="category">Category: <span class="text-danger">*</span></label>
                                 </div>
                             </form>
                         </div>
