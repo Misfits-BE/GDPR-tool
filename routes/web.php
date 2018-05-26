@@ -31,6 +31,9 @@ Route::post('/domains/create', 'DomainController@store')->name('domains.store');
 Route::get('/concerns', 'ConcernController@index')->name('concern.index');
 Route::get('/concerns/create', 'ConcernController@create')->name('concern.create');
 
+// Support Routes
+Route::get('support', 'SupportController@index')->name('support.index');
+
 // Privacy Category routes 
 Route::get('/categories', 'Categories\CategoryController@index')->name('privacy.categories.index');
 

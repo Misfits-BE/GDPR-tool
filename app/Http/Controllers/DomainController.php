@@ -99,6 +99,7 @@ class DomainController extends Controller
      */
     public function show(int $domain)
     {
-        //
+        $domain = $this->domainRepository->findOtFail($domain);
+        return view('domains.show', compact('domain'));
     }
 }

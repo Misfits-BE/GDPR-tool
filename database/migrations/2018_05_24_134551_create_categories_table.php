@@ -11,11 +11,19 @@ class CreateCategoriesTable extends Migration
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
-        Schema::create('categories', function (Blueprint $table) {
+        Schema::create('categories', function (Blueprint $table): void {
             $table->increments('id');
+            $table->integer('author_id')->unsigned();
+            $table->string('slug'); 
+            $table->string('name'); 
+            $table->string('module'); 
+            $table->text('description');
             $table->timestamps();
+
+            // Foreign keys 
+            $table->foreign('author_id')->references('id')->on('users')->onDelete('set null');
         });
     }
 
@@ -24,7 +32,7 @@ class CreateCategoriesTable extends Migration
      *
      * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::dropIfExists('categories');
     }
