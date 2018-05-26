@@ -36,6 +36,7 @@ Route::get('support', 'SupportController@index')->name('support.index');
 
 // Privacy Category routes 
 Route::get('/categories', 'Categories\CategoryController@index')->name('privacy.categories.index');
+Route::get('/categories/create', 'Categories\CategoryController@create')->name('categories.create');
 
 // API keys routes
 Route::get('/account-settings/api', 'ApiKeysController@index')->name('apikeys.index');

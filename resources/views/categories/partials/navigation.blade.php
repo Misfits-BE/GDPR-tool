@@ -14,7 +14,7 @@
         <i class="fas fa-fw mr-1 fa-tag"></i> Categories overview
     </a>
 
-    <a href="" class="list-group-item list-group-item-action">
+    <a href="{{ route('categories.create') }}" class="list-group-item list-group-item-action">
         <i class="fas fa-plus fa-fw mr-1"></i> Create new category
     </a>
 </div>
