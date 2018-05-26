@@ -37,7 +37,7 @@ class UsersController extends Controller
     public function __construct(UsersRepository $usersRepository, RolesRepository $rolesRepository)
     {
         $this->middleware(['auth', 'role:admin'])->except(['destroy']);
-        $this->middleware(['auth'])->only(['destroy']);
+        $this->middleware(['auth'])->only(['destroy']); // TODO Implement destrory gate in this middleware array.
 
         $this->usersRepository  = $usersRepository;
         $this->rolesRepository  = $rolesRepository;
@@ -82,6 +82,7 @@ class UsersController extends Controller
         if ($user = $this->usersRepository->create($input->all())) {
             $user->assignRole($input->role);
 
+            // TODO Implement activity logger.
             Toastr::success("The account for {$user->name} has been created.", 'Account created.');
         }
 
@@ -92,6 +93,7 @@ class UsersController extends Controller
      * Method for destroying a user in the application. 
      * 
      * @todo Implement phpunit method
+     * @todo Implement authorization guard.
      * 
      * @param  int $user The unique identifier from the user in the database.
      * @return RedirectResponse

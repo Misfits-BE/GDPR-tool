@@ -28,9 +28,11 @@
                                             <td>{{ $user->email }}</td>
                                             <td>{{ $user->created_at }}</td>
                                             <td>
-                                                <a href="" class="text-danger text-right">
-                                                    <i class="fas fa-times-circle"></i>
-                                                </a>
+                                                @if ($currentUser->can('delete', $user)) {{-- Authorization checker --}}
+                                                    <a href="" class="text-danger text-right">
+                                                        <i class="fas fa-times-circle"></i>
+                                                    </a>
+                                                @endif
                                             </td>
                                         </tr>
                                     @endforeach
