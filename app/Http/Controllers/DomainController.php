@@ -99,6 +99,6 @@ class DomainController extends Controller
      */
     public function show(int $domain)
     {
-
+        //
     }
 }
