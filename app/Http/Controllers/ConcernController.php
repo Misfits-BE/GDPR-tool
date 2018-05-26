@@ -20,6 +20,7 @@ class ConcernController extends Controller
      * 
      * @todo Implement phpunit 
      * @todo Implement the view.
+     * @todo Set counters to global view composer.
      * 
      * @return view
      */

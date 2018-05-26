@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\View\View;
 use App\Http\Controllers\Controller;
 use App\Repositories\CategoryRepository;
+use App\Http\Requests\Categories\CreateValidator;
 
 /**
  * Class IndexController 
@@ -50,7 +51,6 @@ class CategoryController extends Controller
     /**
      * Create view for a new privacy category in the application. 
      * 
-     * @todo Implement phpunit 
      * @todo Build up the view. 
      * @todo Register the route
      * 
@@ -59,5 +59,25 @@ class CategoryController extends Controller
     public function create(): View 
     {
         return view('categories.create');
+    }
+
+    /**
+     * Store a new privacy category in the database storage. 
+     * 
+     * @todo Implement route
+     * 
+     * @param  CreateValidator The form request class for input validation. 
+     * @return RedirectResponse
+     */
+    public function store(CreateValidator $input): RedirectResponse 
+    {
+        $input->merge(['author_id' => $input->user()->id, 'module' => 'privacy']); 
+
+        if ($this->categoryRepository->create($input->all())) {
+            // TODO: Implement activity logger
+            // TODO: Implement toastr notification
+        }
+
+        return redirect()->route('privacy.categories.index');
     }
 }

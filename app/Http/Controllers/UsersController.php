@@ -91,6 +91,8 @@ class UsersController extends Controller
     /**
      * Method for destroying a user in the application. 
      * 
+     * @todo Implement phpunit method
+     * 
      * @param  int $user The unique identifier from the user in the database.
      * @return RedirectResponse
      */
@@ -100,9 +102,9 @@ class UsersController extends Controller
 
         if ($user->delete()) {
             // TODO: Implementatie activity log
-            // TODO: 
+            // TODO: Implement toastr notification
         }
 
-        return back(Response::HTTP_FOUND); // Code: 302
+        return redirect()->route('users.index', [], Response::HTTP_FOUND); // Code: 302
     }
 }
