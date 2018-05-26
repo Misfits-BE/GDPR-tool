@@ -46,6 +46,8 @@ class UsersController extends Controller
     /**
      * Get the index page for the user management console. 
      * 
+     * @todo Implement phpunit testcase
+     * 
      * @return View
      */
     public function index(): View
@@ -55,7 +57,9 @@ class UsersController extends Controller
 
     /**
      * View for creating a new user in the application. 
-     * 
+     *
+     * @todo Implement phpunit testcase
+     *  
      * @return View
      */
     public function create(): View 
@@ -95,7 +99,8 @@ class UsersController extends Controller
         $user = $this->usersRepository->findOrFail($user); 
 
         if ($user->delete()) {
-            //
+            // TODO: Implementatie activity log
+            // TODO: 
         }
 
         return back(Response::HTTP_FOUND); // Code: 302
