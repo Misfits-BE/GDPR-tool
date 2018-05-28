@@ -10,7 +10,7 @@
             <div class="card card-body border-0 box-shadow">
                 <h6 class="border-bottom border-gray pb-2 mb-3">Create new category</h6>
 
-                <form method="POST" action="">
+                <form method="POST" action="{{ route('categories.store') }}">
                     @csrf {{-- Form field protection --}}
 
                     <div class="form-group row">

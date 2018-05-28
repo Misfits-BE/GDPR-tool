@@ -7,6 +7,8 @@ use Illuminate\View\View;
 use App\Http\Controllers\Controller;
 use App\Repositories\CategoryRepository;
 use App\Http\Requests\Categories\CreateValidator;
+use App\Repositories\ActivityRepository;
+use Brian2694\Toastr\Facades\Toastr;
 
 /**
  * Class IndexController 
@@ -19,19 +21,25 @@ use App\Http\Requests\Categories\CreateValidator;
  */
 class CategoryController extends Controller
 {
-    /** @var CategoryRepository $categoryRepository The variablem for the category abstraction layer (MySQL: Categories) */
+    /** @var CategoryRepository $categoryRepository The variable for the category abstraction layer (MySQL: Categories) */
     private $categoryRepository; 
+
+    /** @var ActivityRepository $activityRepository The variable for the activities abstraction layer (MySQL: activity_log) */
+    private $activityRepository;
 
     /**
      * CategoryController constructor 
      * 
      * @param  CategoryRepository $categoryRepository The category abstraction layer between database and controller.
+     * @param  ActivityRepository $activityRepository The activity abstraction layer between database and controller. 
      * @return void
      */
-    public function __construct(CategoryRepository $categoryRepository)
+    public function __construct(CategoryRepository $categoryRepository, ActivityRepository $activityRepository)
     {
         $this->middleware(['auth', 'role:admin']);
+
         $this->categoryRepository = $categoryRepository;
+        $this->activityRepository = $activityRepository;
     }
 
     /**
@@ -64,6 +72,8 @@ class CategoryController extends Controller
      * Store a new privacy category in the database storage. 
      * 
      * @todo Implement route
+     * @todo Implement phpunit
+     * @todo Build up the validator class
      * 
      * @param  CreateValidator The form request class for input validation. 
      * @return RedirectResponse
@@ -72,9 +82,15 @@ class CategoryController extends Controller
     {
         $input->merge(['author_id' => $input->user()->id, 'module' => 'privacy']); 
 
-        if ($this->categoryRepository->create($input->all())) {
-            // TODO: Implement activity logger
-            // TODO: Implement toastr notification
+        if ($activity = $this->categoryRepository->create($input->all())) {
+            $this->activityRepository->registerActivity($category, __('categories.activity.store', [
+                'title' => $category->title, 'module' => $category->module
+            ]));
+            
+            Toastr::success( //! Notification message
+                __('categories.toastr.store.message', ['title' => $category->title, 'module' => $category->module]), 
+                __('categories.toastr.store.title')
+            );
         }
 
         return redirect()->route('privacy.categories.index');
