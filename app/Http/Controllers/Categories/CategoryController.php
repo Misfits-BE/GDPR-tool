@@ -51,7 +51,6 @@ class CategoryController extends Controller
     /**
      * Create view for a new privacy category in the application. 
      * 
-     * @todo Build up the view. 
      * @todo Register the route
      * 
      * @return View
