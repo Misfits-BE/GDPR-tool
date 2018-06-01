@@ -23,5 +23,5 @@ class Category extends Model
      * 
      * @return array
      */
-    protected $fillable = ['author_id', 'module', 'title', 'description'];
+    protected $fillable = ['author_id', 'module', 'name', 'description'];
 }
