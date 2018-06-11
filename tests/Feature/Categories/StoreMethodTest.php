@@ -17,5 +17,5 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
  */
 class StoreMethodTest extends TestCase
 {
-    use RefreshDatabase, WithFaker;
+    use RefreshDatabase, WithFaker;gt
 }

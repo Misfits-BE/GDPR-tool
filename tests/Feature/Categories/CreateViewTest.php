@@ -5,6 +5,8 @@ namespace Tests\Feature\Categories;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\CreatesUser;
+use Illuminate\Http\Response;
 
 /**
  * Class CreateViewTest
@@ -17,7 +19,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
  */
 class CreateViewTest extends TestCase
 {
-    use RefreshDatabase;
+    use RefreshDatabase, CreatesUser;
 
     /**
      * @test
@@ -25,7 +27,9 @@ class CreateViewTest extends TestCase
      */
     public function notAuthenticated(): void 
     {
-
+        $this->get(route('categories.create'))
+            ->assertStatus(Response::HTTP_FOUND) // Code: 302
+            ->assertRedirect(route('login'));
     }
     
     /**
@@ -34,7 +38,9 @@ class CreateViewTest extends TestCase
      */
     public function success(): void 
     {
-
+        $this->actingAs($this->createUser('admin'))
+            ->get(route('categories.create'))
+            ->assertStatus(Response::HTTP_OK);
     }
 
     /**
@@ -43,6 +49,8 @@ class CreateViewTest extends TestCase
      */
     public function incorrectRole(): void 
     {
-
+        $this->actingAs($this->createUser('user'))
+            ->get(route('categories.create'))
+            ->assertStatus(Response::HTTP_FORBIDDEN);
     }
 }
