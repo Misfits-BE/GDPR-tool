@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
+use App\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * Class Concern
@@ -24,6 +26,15 @@ class Concern extends Model
      * @return array
      */
     protected $fillable = ['author_id', 'plaform_id', 'is_open', 'title', 'content'];
+
+    /**
+     * Get the information from the assigned user through the relation.
+     * @return BelongsTo
+     */
+    public function assignedUser(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'assignee_id');
+    }
 
     /**
      * Query scope for all the open concerns.

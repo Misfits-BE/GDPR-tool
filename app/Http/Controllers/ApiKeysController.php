@@ -45,6 +45,8 @@ class ApiKeysController extends Controller
     /**
      * Get the index management console page for the api keys.
      *
+     * @todo Implement phpunit
+     * 
      * @return View
      */
     public function index(): View
@@ -55,6 +57,8 @@ class ApiKeysController extends Controller
 
     /**
      * Controller for registering a new API token in the application. 
+     * 
+     * @todo Implement phpunit
      * 
      * @param  ApiKeyValidator $input The validation class for the form inputs
      * @return RedirectResponse
@@ -74,6 +78,8 @@ class ApiKeysController extends Controller
 
     /**
      * Delete some api key in the application. 
+     * 
+     * @todo Implement phpunit
      * 
      * @param  int $apikey  The unique identifier from the key in the database storage.
      * @return RedirectResponse

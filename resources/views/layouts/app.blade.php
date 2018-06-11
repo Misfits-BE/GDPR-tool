@@ -88,11 +88,16 @@
                         Users <span class="badge badge-pill badge-danger align-text-bottom">{{ $countUsers }}</span>
                     </a>
 
-                    <a class="nav-link" href="{{ route('domains.index') }}"><i class="fas fa-fw fa-link"></i> Domains</a>
-
                     @if ($currentUser->hasRole('admin'))
+                        <a class="nav-link" href="{{ route('support.index') }}">
+                            <i class="fas fa-fw fa-info-circle"></i> Support tickets 
+                            <span class="badge badge-pill badge-danger align-text-bottom"> 0 </span>
+                        </a>
+
+                        <a class="nav-link" href="{{ route('domains.index') }}"><i class="fas fa-fw fa-link"></i> Domains</a>
+                        <a class="nav-link" href="{{ route('privacy.categories.index') }}"><i class="fas fa-tags"></i> Categories</a>
                         <a class="nav-link" href=""><i class="fas fa-fw fa-th-list"></i> Logs</a>
-                        <a class="nav-link" href=""><i class="fas fa-fw fa-book"></i> API Documentation</a>
+                        <a class="nav-link" href=""><i class="fas fa-fw fa-book"></i> API Docs</a>
                     @endif
                 </nav>
             </div>

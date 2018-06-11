@@ -37,7 +37,7 @@ class UsersController extends Controller
     public function __construct(UsersRepository $usersRepository, RolesRepository $rolesRepository)
     {
         $this->middleware(['auth', 'role:admin'])->except(['destroy']);
-        $this->middleware(['auth'])->only(['destroy']);
+        $this->middleware(['auth'])->only(['destroy']); // TODO Implement destrory gate in this middleware array.
 
         $this->usersRepository  = $usersRepository;
         $this->rolesRepository  = $rolesRepository;
@@ -45,6 +45,8 @@ class UsersController extends Controller
 
     /**
      * Get the index page for the user management console. 
+     * 
+     * @todo Implement phpunit testcase
      * 
      * @return View
      */
@@ -55,7 +57,9 @@ class UsersController extends Controller
 
     /**
      * View for creating a new user in the application. 
-     * 
+     *
+     * @todo Implement phpunit testcase
+     *  
      * @return View
      */
     public function create(): View 
@@ -78,6 +82,7 @@ class UsersController extends Controller
         if ($user = $this->usersRepository->create($input->all())) {
             $user->assignRole($input->role);
 
+            // TODO Implement activity logger.
             Toastr::success("The account for {$user->name} has been created.", 'Account created.');
         }
 
@@ -87,6 +92,9 @@ class UsersController extends Controller
     /**
      * Method for destroying a user in the application. 
      * 
+     * @todo Implement phpunit method
+     * @todo Implement authorization guard.
+     * 
      * @param  int $user The unique identifier from the user in the database.
      * @return RedirectResponse
      */
@@ -95,9 +103,10 @@ class UsersController extends Controller
         $user = $this->usersRepository->findOrFail($user); 
 
         if ($user->delete()) {
-            //
+            // TODO: Implementatie activity log
+            // TODO: Implement toastr notification
         }
 
-        return back(Response::HTTP_FOUND); // Code: 302
+        return redirect()->route('users.index', [], Response::HTTP_FOUND); // Code: 302
     }
 }
