@@ -5,14 +5,13 @@ namespace App\Models;
 use App\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use App\Models\Relations\{AuthorRelation, AssigneeRelation};
+use App\Models\Scopes\AssigneeScope;
 
 /**
  * Class Concern
  * ----
  * Database models for all the privacy concerns.
- *
- * @todo Build up the migration file.
  *
  * @author      Tim Joosten <tim@activisme.be>
  * @copyright   2018 Activisme_BE
@@ -20,21 +19,14 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  */
 class Concern extends Model
 {
+    use AuthorRelation, AssigneeRelation, AssigneeScope; 
+
     /**
      * Mass-assign fields for the database table. 
      * 
      * @return array
      */
-    protected $fillable = ['author_id', 'plaform_id', 'is_open', 'title', 'content'];
-
-    /**
-     * Get the information from the assigned user through the relation.
-     * @return BelongsTo
-     */
-    public function assignedUser(): BelongsTo
-    {
-        return $this->belongsTo(User::class, 'assignee_id');
-    }
+    protected $fillable = ['author_id', 'domain_id', 'is_open', 'title', 'concern'];
 
     /**
      * Query scope for all the open concerns.
@@ -45,7 +37,7 @@ class Concern extends Model
     public function scopeOpen($query): Builder
     {
         return $query->where('is_open', true);
-    }
+    } 
 
     /**
      * Query scope for all the closed concerns.
@@ -56,5 +48,15 @@ class Concern extends Model
     public function scopeClosed($query): Builder
     {
         return $query->where('is_open', false);
+    }
+
+    /**
+     * Query scope for all the created concerns. (authenticated user)
+     * 
+     * @return Builder
+     */
+    public function scopeOwnConcerns($query): Builder
+    {
+        return $query->open()->where('author_id', auth()->user()->id);
     }
 }

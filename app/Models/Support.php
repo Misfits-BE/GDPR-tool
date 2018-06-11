@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Shared\AuthorRelation;
+use App\Models\Relations\AuthorRelation;
 
 /**
  * Class Support 

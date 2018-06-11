@@ -16,9 +16,18 @@ class CreateConcernsTable extends Migration
     {
         Schema::create('concerns', function (Blueprint $table): void {
             $table->increments('id');
-            $table->integer('domain_id')->unsigned(); 
+            $table->integer('domain_id')->unsigned();
+            $table->integer('author_id')->unsigned();
+            $table->integer('assignee_id')->nullable()->unsigned();
             $table->boolean('is_open');
+            $table->string('title'); 
+            $table->text('concern');
             $table->timestamps();
+
+            //! Registration from the foreign keys 
+            $table->foreign('author_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('domain_id')->references('id')->on('domains')->onDelete('cascade');
+            $table->foreign('assignee_id')->references('id')->on('users')->onDelete('set null');
         });
     }
 

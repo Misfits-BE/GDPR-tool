@@ -11,7 +11,7 @@ use App\Repositories\UsersRepository;
  * ----
  * The view composer that applies to all the application views.
  *
- * @uthor       Tim Joosten <tim@activisme.be>
+ * @author      Tim Joosten <tim@activisme.be>
  * @copyright   2018 Activisme_BE
  * @package     App\Composers
  */
@@ -35,6 +35,7 @@ class GlobalComposer
         $this->auth           = $auth;
         $this->userRepository = $userRepository;
     }
+    
     /**
      * Bind data to the view
      *

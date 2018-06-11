@@ -6,9 +6,9 @@
         <div class="col-md-12">
             <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
                 <div class="btn-group box-shadow mr-2" role="group" aria-label="First group">
-                    <a href="{{ route('concern.index') }}" class="btn btn-primary">Open <span class="ml-1 badge badge-light">9</span></a>
-                    <button type="button" class="btn btn-primary">Assigned <span class="ml-1 badge badge-light">9</span></button>
-                    <button type="button" class="btn btn-primary">Created <span class="ml-1 badge badge-light">9</span></button>
+                    <a href="{{ route('concern.index') }}" class="btn btn-primary">Open <span class="ml-1 badge badge-light">{{ $openCount }}</span></a>
+                    <button type="button" class="btn btn-primary">Assigned <span class="ml-1 badge badge-light">{{ $assignedCount }}</span></button>
+                    <button type="button" class="btn btn-primary">Created <span class="ml-1 badge badge-light">{{ $createdCount }}</span></button>
                 </div>
                 <div class="btn-group box-shadow" role="group" aria-label="Third group">
                     <a href="{{ route('concern.create') }}" class="btn btn-secondary"><i class="fas fa-fw mr-1 fa-plus-circle"></i> New concern</a>
