@@ -16,7 +16,8 @@
         "misfits/api-guard": "^4.5",
         "mpociot/reanimate": "^1.0",
         "spatie/laravel-activitylog": "^2.5",
-        "spatie/laravel-permission": "^2.12"
+        "spatie/laravel-permission": "^2.12",
+        "spatie/laravel-sluggable": "^2.1"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.1",

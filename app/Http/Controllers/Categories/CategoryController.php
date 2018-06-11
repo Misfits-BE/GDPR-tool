@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Categories;
 
 use Illuminate\Http\Request;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 use App\Http\Controllers\Controller;
 use App\Repositories\CategoryRepository;
@@ -54,7 +53,7 @@ class CategoryController extends Controller
      */
     public function index(): View 
     {
-        return view('categories.index', ['categories' => $this->categoryRepository->simplePaginate(20)]);
+        return view('categories.index');
     }
 
     /**
@@ -72,6 +71,10 @@ class CategoryController extends Controller
     /**
      * Store a new privacy category in the database storage. 
      * 
+     * @todo Implement route
+     * @todo Implement phpunit
+     * @todo Build up the validator class
+     * 
      * @param  CreateValidator The form request class for input validation. 
      * @return RedirectResponse
      */
@@ -79,7 +82,7 @@ class CategoryController extends Controller
     {
         $input->merge(['author_id' => $input->user()->id, 'module' => 'privacy']); 
 
-        if ($category = $this->categoryRepository->create($input->all())) {
+        if ($activity = $this->categoryRepository->create($input->all())) {
             $this->activityRepository->registerActivity($category, __('categories.activity.store', [
                 'title' => $category->title, 'module' => $category->module
             ]));

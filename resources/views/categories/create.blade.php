@@ -26,7 +26,7 @@
                         <label for="description" class="col-3 col-form-label"> Description <span class="input-required">*</span></label>
 
                         <div class="col-9">
-                            <textarea @input('description') aria-describedby="descHelpBlock" id="description" class="form-control @error('description', 'is-invalid')" placeholder="Category description" rows="7">{{ old('description') }}</textarea>
+                            <textarea @input('dscription') aria-describedby="descHelpBlock" id="description" class="form-control @error('description', 'is-invalid')" placeholder="Category description" rows="7"></textarea>
                         
                             @if ($errors->has('description'))
                                 @error ('description', '<div class="invalid-feedback">:message</div>') {{-- Validation error partial --}}

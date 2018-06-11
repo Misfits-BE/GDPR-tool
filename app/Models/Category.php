@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Shared\AuthorRelation;
+use Spatie\Sluggable\HasSlug;
 
 /**
  * Class Category 
@@ -16,12 +17,12 @@ use App\Models\Shared\AuthorRelation;
  */
 class Category extends Model
 {
-    use AuthorRelation;
+    use AuthorRelation, HasSlug;
 
     /**
      * Mass-assign fields for the database table. 
      * 
      * @return array
      */
-    protected $fillable = ['author_id', 'module', 'name', 'description'];
+    protected $fillable = ['author_id', 'module', 'title', 'description'];
 }
