@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\View\View;
+use Illuminate\Http\RedirectResponse;
 use App\Repositories\UsersRepository;
 
 /**
@@ -16,12 +17,12 @@ use App\Repositories\UsersRepository;
  */
 class ConcernController extends Controller
 {
-
     /**
      * Get the admin index page for all the privacy concerns. 
      * 
      * @todo Implement phpunit 
      * @todo Implement the view.
+     * @todo Implement the created, assigned, open param.
      * @todo Set counters to global view composer.
      * 
      * @return view
