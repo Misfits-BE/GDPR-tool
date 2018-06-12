@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\View\View;
+use App\Repositories\UsersRepository;
 
 /**
  * Class ConcernController
@@ -15,6 +16,7 @@ use Illuminate\View\View;
  */
 class ConcernController extends Controller
 {
+
     /**
      * Get the admin index page for all the privacy concerns. 
      * 
@@ -35,10 +37,11 @@ class ConcernController extends Controller
      * @todo Implement phpunit
      * @todo Implement view
      * 
+     * @param  UsersRepository $userRepository The abstraction layer between controller and users DB table. 
      * @return View 
      */
-    public function create(): View 
+    public function create(UsersRepository $userRepository): View 
     {
-        return view('concerns.shared.create');
+        return view('concerns.shared.create', ['admins' => $userRepository->getUsersByRole('get', 'admin')]);
     }
 }
