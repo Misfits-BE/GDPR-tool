@@ -30,6 +30,7 @@ Route::post('/domains/create', 'DomainController@store')->name('domains.store');
 // Concern routes 
 Route::get('/concerns', 'ConcernController@index')->name('concern.index');
 Route::get('/concerns/create', 'ConcernController@create')->name('concern.create');
+Route::post('/concerns/create', 'ConcernController@store')->name('concern.store');
 
 // Support Routes
 Route::get('support', 'SupportController@index')->name('support.index');
