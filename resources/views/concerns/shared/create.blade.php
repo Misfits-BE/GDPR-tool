@@ -31,12 +31,14 @@
                                     </option>
                                 @endforeach {{-- /// END domain loop --}}
                             </select>
+
+                            @error('domain_id', '<div class="invalid-feedback">:message</div>')
                         </div>
                     </div>
 
                     @if ($currentUser->hasRole('admin')) {{-- Admin protected fields --}}
                         <div class="form-group row"> {{-- Assignee form-group --}}
-                            <label name="assignee" class="col-3 col-form-label">Assign concern to: <span class="input-required">*</span></label>
+                            <label name="assignee" class="col-3 col-form-label">Assign concern to:</label>
 
                             <div class="col-9">
                                 <select id="assignee" class="form-control @error('assignee_id', 'is-invalid')" @input('assignee_id')>
@@ -60,7 +62,8 @@
                         <label for="content" class="col-3 col-form-label">Concern description: <span class="input-required">*</span></label>
 
                         <div class="col-9">
-                            <textarea id="summernote" name="editordata"></textarea>
+                            <textarea id="summernote" class="form-control @error('concern', 'is-invalid')" @input('concern')>{{ old('concern') }}</textarea>
+                            @error('concern', '<div class="invalid-feedback">:message</div>')
                         </div>
                     </div>
 
