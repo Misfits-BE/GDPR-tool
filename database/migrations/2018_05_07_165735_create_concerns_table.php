@@ -19,7 +19,7 @@ class CreateConcernsTable extends Migration
             $table->integer('domain_id')->unsigned();
             $table->integer('author_id')->unsigned();
             $table->integer('assignee_id')->nullable()->unsigned();
-            $table->boolean('is_open');
+            $table->boolean('is_open')->default(1); // 1 = true
             $table->string('title'); 
             $table->text('concern');
             $table->timestamps();
