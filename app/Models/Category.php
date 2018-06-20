@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Relations\AuthorRelation;
 use Spatie\Sluggable\HasSlug;
+use Spatie\Sluggable\SlugOptions;
 
 /**
  * Class Category 
@@ -24,5 +25,19 @@ class Category extends Model
      * 
      * @return array
      */
-    protected $fillable = ['author_id', 'module', 'title', 'description'];
+    protected $fillable = ['author_id', 'module', 'name', 'description'];
+
+    /**
+     * Configure the slugs for the category. 
+     * 
+     * @return SlugOptions
+     */
+    public function getSlugOptions(): SlugOptions
+    {
+        return SlugOptions::create()
+            ->generateSlugsFrom('name')
+            ->saveSlugsTo('slug')
+            ->slugsShouldBeNoLongerThan(50)
+            ->doNotGenerateSlugsOnUpdate();
+    }
 }
