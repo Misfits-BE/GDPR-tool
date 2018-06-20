@@ -27,80 +27,76 @@
 <body class="bg-light">
     <div id="app">
         <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
-            <div class="container">
-                <a class="navbar-brand mr-auto mr-lg-0" href="#">{{ config('app.name') }} - GDPR</a>
-                <button class="navbar-toggler p-0 border-0" type="button" data-toggle="offcanvas">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+            <a class="navbar-brand mr-auto mr-lg-0" href="#">{{ config('app.name') }} - GDPR</a>
+            <button class="navbar-toggler p-0 border-0" type="button" data-toggle="offcanvas">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-                <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item">
-                            <a href="" class="nav-link text-danger">
-                                <i class="far align-middle fa-fw fa-bell"></i> <span class="badge align-middle badge-pill badge-danger">32</span>
+            <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a href="" class="nav-link text-danger">
+                            <i class="far align-middle fa-fw fa-bell"></i> <span class="badge align-middle badge-pill badge-danger">32</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            {{ $currentUser->name }} <span class="caret"></span>
+                        </a>
+
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a href="{{ route('profile.settings') }}" class="dropdown-item">
+                                <i class="fas fa-fw fa-user-cog"></i> Account settings
                             </a>
-                        </li>
 
-                        <li class="nav-item dropdown">
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                {{ $currentUser->name }} <span class="caret"></span>
+                            @if (! $currentUser->hasRole('admin'))
+                                <a href="" class="dropdown-item">
+                                    <i class="fas fa-fw fa-question-circle"></i> Request support
+                                </a>
+                            @endif
+
+                            <div class="dropdown-divider"></div>
+
+                            <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                <i class="fa-fw fas fa-power-off text-danger"></i> {{ __('Logout') }}
                             </a>
 
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a href="{{ route('profile.settings') }}" class="dropdown-item">
-                                    <i class="fas fa-fw fa-user-cog"></i> Account settings
-                                </a>
-
-                                @if (! $currentUser->hasRole('admin'))
-                                    <a href="" class="dropdown-item">
-                                        <i class="fas fa-fw fa-question-circle"></i> Request support
-                                    </a>
-                                @endif
-
-                                <div class="dropdown-divider"></div>
-
-                                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                    <i class="fa-fw fas fa-power-off text-danger"></i> {{ __('Logout') }}
-                                </a>
-
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                    @csrf {{-- Form field protection --}}
-                                </form>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf {{-- Form field protection --}}
+                            </form>
+                        </div>
+                    </li>
+                </ul>
             </div>
         </nav>
 
         <div class="nav-scroller bg-white box-shadow">
-            <div class="container">
-                <nav class="nav nav-underline">
-                    <a class="nav-link pl-0 active" href="{{ route('home') }}"><i class="fas fa-fw fa-tachometer-alt"></i> Dashboard</a>
+            <nav class="nav nav-underline">
+                <a class="nav-link active" href="{{ route('home') }}"><i class="fas fa-fw fa-tachometer-alt"></i> Dashboard</a>
 
-                    <a class="nav-link" href="">
-                        <i class="fas fa-fw fa-question-circle"></i>
-                        Concerns <span class="badge badge-pill badge-danger align-text-bottom">27</span>
+                <a class="nav-link" href="">
+                    <i class="fas fa-fw fa-question-circle"></i>
+                    Concerns <span class="badge badge-pill badge-danger align-text-bottom">27</span>
+                </a>
+
+                <a class="nav-link" href="{{ route('users.index') }}">
+                    <i class="fas fa-fw fa-users"></i>
+                    Users <span class="badge badge-pill badge-danger align-text-bottom">{{ $countUsers }}</span>
+                </a>
+
+                @if ($currentUser->hasRole('admin'))
+                    <a class="nav-link" href="{{ route('support.index') }}">
+                        <i class="fas fa-fw fa-info-circle"></i> Support tickets 
+                        <span class="badge badge-pill badge-danger align-text-bottom"> 0 </span>
                     </a>
 
-                    <a class="nav-link" href="{{ route('users.index') }}">
-                        <i class="fas fa-fw fa-users"></i>
-                        Users <span class="badge badge-pill badge-danger align-text-bottom">{{ $countUsers }}</span>
-                    </a>
-
-                    @if ($currentUser->hasRole('admin'))
-                        <a class="nav-link" href="{{ route('support.index') }}">
-                            <i class="fas fa-fw fa-info-circle"></i> Support tickets 
-                            <span class="badge badge-pill badge-danger align-text-bottom"> 0 </span>
-                        </a>
-
-                        <a class="nav-link" href="{{ route('domains.index') }}"><i class="fas fa-fw fa-link"></i> Domains</a>
-                        <a class="nav-link" href="{{ route('privacy.categories.index') }}"><i class="fas fa-tags"></i> Categories</a>
-                        <a class="nav-link" href=""><i class="fas fa-fw fa-th-list"></i> Logs</a>
-                        <a class="nav-link" href=""><i class="fas fa-fw fa-book"></i> API Docs</a>
-                    @endif
-                </nav>
-            </div>
+                    <a class="nav-link" href="{{ route('domains.index') }}"><i class="fas fa-fw fa-link"></i> Domains</a>
+                    <a class="nav-link" href="{{ route('privacy.categories.index') }}"><i class="fas fa-tags"></i> Categories</a>
+                    <a class="nav-link" href=""><i class="fas fa-fw fa-th-list"></i> Logs</a>
+                    <a class="nav-link" href=""><i class="fas fa-fw fa-book"></i> API Docs</a>
+                @endif
+            </nav>
         </div>
 
         <main role="main" class="container">
