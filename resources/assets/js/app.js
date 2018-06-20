@@ -20,3 +20,28 @@ Vue.component('example-component', require('./components/ExampleComponent.vue'))
 const app = new Vue({
     el: '#app'
 });
+
+/**
+ * Bootstrap summernote implementation 
+ * ----
+ * Needed for the editor fields in the application. 
+ */
+require ('../../../node_modules/summernote/dist/summernote-bs4.js');
+
+/**
+ * Boot up scripts when the page is ready. 
+ */
+$(document).ready(function() {
+    $('#summernote').summernote({
+        height: 250,
+        disableResizeEditor: true,
+        toolbar: [
+        // [groupName, [list of button]]
+        ['style', ['bold', 'italic', 'underline', 'clear']],
+        ['font', ['strikethrough', 'superscript', 'subscript']],
+        ['fontsize', ['fontsize']],
+        ['color', ['color']],
+        ['para', ['ul', 'ol', 'paragraph']],
+        ['height', ['height']]
+    ]});
+});

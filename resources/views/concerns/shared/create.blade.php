@@ -60,7 +60,7 @@
                         <label for="content" class="col-3 col-form-label">Concern description: <span class="input-required">*</span></label>
 
                         <div class="col-9">
-                            
+                            <textarea id="summernote" name="editordata"></textarea>
                         </div>
                     </div>
 
