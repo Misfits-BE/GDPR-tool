@@ -4,6 +4,15 @@ namespace App\Http\Requests\Concerns;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * Class CreateValidator 
+ * ---- 
+ * Form request class for validting the input from a new privacy concern.
+ * 
+ * @author      Tim Joosten <tim@activisme.be>
+ * @copyright   2018 Tim Joosten
+ * @package     App\Http\Requests\Concerns
+ */
 class CreateValidator extends FormRequest
 {
     /**
@@ -11,9 +20,11 @@ class CreateValidator extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(): bool 
     {
-        return false;
+        // No validation checks needed because the validator is for both authenticated
+        // users and non authenticated users.
+        return true;
     }
 
     /**
@@ -21,10 +32,12 @@ class CreateValidator extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return [
-            //
+            'title'     => 'required|string',
+            'domain_id' => 'required|numeric',
+            'concern'   => 'required',
         ];
     }
 }

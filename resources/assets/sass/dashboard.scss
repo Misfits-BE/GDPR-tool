@@ -1,24 +1,16 @@
 html,
 body {
-  overflow-x: hidden; // Prevent scroll on narrow devices
+  overflow-x: hidden; /* Prevent scroll on narrow devices */
 }
 
 body {
   padding-top: 56px;
 }
 
-.table th.no-border {
-  border-top: none;
-}
-
-.table-border-margin {
-  margin-bottom: .25rem;
-}
-
 @media (max-width: 991.98px) {
   .offcanvas-collapse {
     position: fixed;
-    top: 56px; // Height of navbar
+    top: 56px; /* Height of navbar */
     bottom: 0;
     left: 100%;
     width: 100%;
@@ -70,37 +62,21 @@ body {
 }
 
 .nav-underline .active {
-  font-weight: 600;
+  font-weight: 500;
   color: #343a40;
 }
 
-.text-white-50 {
-  color: rgba(255, 255, 255, .5);
-}
+.text-white-50 { color: rgba(255, 255, 255, .5); }
 
-.bg-purple {
-  background-color: #6f42c1;
-}
+.bg-purple { background-color: #6f42c1; }
 
-.border-bottom {
-  border-bottom: 1px solid #e5e5e5;
-}
+.border-bottom { border-bottom: 1px solid #e5e5e5; }
 
-.box-shadow {
-  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
-}
+.box-shadow { box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05); }
 
-.lh-100 {
-  line-height: 1;
-}
-
-.lh-125 {
-  line-height: 1.25;
-}
-
-.lh-150 {
-  line-height: 1.5;
-}
+.lh-100 { line-height: 1; }
+.lh-125 { line-height: 1.25; }
+.lh-150 { line-height: 1.5; }
 
 .input-required {
   color: #dc3545!important;
