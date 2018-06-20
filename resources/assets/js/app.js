@@ -28,9 +28,7 @@ const app = new Vue({
  */
 require ('../../../node_modules/summernote/dist/summernote-bs4.js');
 
-/**
- * Boot up scripts when the page is ready. 
- */
+// Boot up sommernote scripts when page is ready. 
 $(document).ready(function() {
     $('#summernote').summernote({
         height: 250,
